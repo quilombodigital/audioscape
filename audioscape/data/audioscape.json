@@ -1,0 +1,18 @@
+{
+  "recorderVideo":{
+    "videoDeviceIndex":0,
+    "width":1280,
+    "height":720,
+    "frameRate":30,
+    "gopFrameRate":60,
+    "videoBitrate":2000000
+  },
+  "recorderAudio":{
+    "deviceIndex":0,
+    "quality":0,
+    "bitrate":128000,
+    "samplerate":22050,
+    "sampleSizeInBits":16,
+    "audioChannels":1
+  }
+}
