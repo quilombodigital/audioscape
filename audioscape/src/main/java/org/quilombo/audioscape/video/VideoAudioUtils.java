@@ -17,13 +17,14 @@ public class VideoAudioUtils {
             System.out.println("- " + i + " " + mixerInfo[i].getName());
     }
 
-    public static void extractAudioFromVideo(String inputVideo, String outputAudio) throws Exception {
+    public static void extractAudioFromVideo(String inputVideo, String outputAudio, AudioConfig audioConfig) throws Exception {
         System.out.println("Started extracting Audio from Video");
         FFmpegFrameGrabber grabber = new FFmpegFrameGrabber(inputVideo);
         grabber.start();
 
-        FrameRecorder recorder = new FFmpegFrameRecorder(outputAudio, grabber.getAudioChannels());
-        recorder.setSampleRate(grabber.getSampleRate());
+        FrameRecorder recorder = new FFmpegFrameRecorder(outputAudio, audioConfig.audioChannels);
+        recorder.setSampleRate(audioConfig.samplerate);
+        recorder.setAudioBitrate(audioConfig.bitrate);
         recorder.start();
 
         Frame frame;

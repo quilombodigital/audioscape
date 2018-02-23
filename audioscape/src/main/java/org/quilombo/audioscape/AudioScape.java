@@ -2,6 +2,9 @@ package org.quilombo.audioscape;
 
 import com.google.common.io.Files;
 import it.tadbir.net.Google.Googler;
+import org.bytedeco.javacpp.Loader;
+import org.bytedeco.javacpp.opencv_core;
+import org.bytedeco.javacv.OpenCVFrameGrabber;
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
 import org.jnativehook.keyboard.NativeKeyEvent;
@@ -20,6 +23,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static it.tadbir.net.Google.Constants.Search.Image.FILE_TYPE_KEY_JPG;
 import static it.tadbir.net.Google.Constants.Search.Image.SIZE_KEY_MEDIUM;
@@ -60,6 +65,13 @@ public class AudioScape {
 
     public void flow() throws Exception {
 
+        // Get the logger for "org.jnativehook" and set the level to warning.
+        Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
+        logger.setLevel(Level.WARNING);
+
+// Don't forget to disable the parent handlers.
+        logger.setUseParentHandlers(false);
+
         try {
             GlobalScreen.registerNativeHook();
         } catch (NativeHookException ex) {
@@ -99,7 +111,7 @@ public class AudioScape {
 
         //EXTRACT AUDIO FROM VIDEO
         String userAudioFilename = recordResultDirectory + "/audio.wav";
-        VideoAudioUtils.extractAudioFromVideo(userVideoFilename, userAudioFilename);
+        VideoAudioUtils.extractAudioFromVideo(userVideoFilename, userAudioFilename, config.recorderAudio);
 
         //CONVERT AUDIO TO TEXT
         SpeechToText stt = new SpeechToText();
