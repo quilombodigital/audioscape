@@ -2,9 +2,6 @@ package org.quilombo.audioscape;
 
 import com.google.common.io.Files;
 import it.tadbir.net.Google.Googler;
-import org.bytedeco.javacpp.Loader;
-import org.bytedeco.javacpp.opencv_core;
-import org.bytedeco.javacv.OpenCVFrameGrabber;
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
 import org.jnativehook.keyboard.NativeKeyEvent;
@@ -121,7 +118,8 @@ public class AudioScape {
         Util.writeToFile(transcription, userTranscriptFilename);
 
         //EXTRACT EMOTION DATA
-        TextAnalysis tte = new TextAnalysis(new TextAnalysisConfig());
+        TextAnalysisConfig textAnalysisConfig = TextAnalysisConfig.load();
+        TextAnalysis tte = new TextAnalysis(textAnalysisConfig);
         String emotionResult = tte.getEmotion(10, transcription);
         String userEmotionFilename = recordResultDirectory + "/emotion.txt";
         Util.writeToFile(emotionResult, userEmotionFilename);
