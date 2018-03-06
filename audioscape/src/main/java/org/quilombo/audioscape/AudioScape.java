@@ -10,6 +10,7 @@ import org.quilombo.audioscape.analysis.TextAnalysis;
 import org.quilombo.audioscape.analysis.TextAnalysisConfig;
 import org.quilombo.audioscape.download.Downloader;
 import org.quilombo.audioscape.download.DownloaderConfig;
+import org.quilombo.audioscape.gui.VideoPlayer;
 import org.quilombo.audioscape.speech.SpeechToText;
 import org.quilombo.audioscape.util.Util;
 import org.quilombo.audioscape.video.VideoAudioUtils;
@@ -28,55 +29,87 @@ import static it.tadbir.net.Google.Constants.Search.Image.SIZE_KEY_MEDIUM;
 
 public class AudioScape {
 
-    public static final String STATE_WAITING_USER_PRESS = "waiting_user";
-    public static final String STATE_RECORDING = "recording";
-    public static final String STATE_PROCESSING = "processing";
-    public static final String STATE_SHOWING = "showing";
+    File RESULTS_DIRECTORY = new File("data/result");
 
-    public String currentState = STATE_WAITING_USER_PRESS;
-    AudioscapeConfig config;
+    public static AudioScapeStates state = AudioScapeStates.INITIALIZING;
+    private AudioScapeConfig config;
+    private VideoPlayer player;
 
     public AudioScape() throws Exception {
-        config = AudioscapeConfig.load();
+        config = AudioScapeConfig.load();
     }
 
-    public class GlobalKeyListener implements NativeKeyListener {
-        @Override
-        public void nativeKeyTyped(NativeKeyEvent e) {
+    public void loop() throws Exception {
+
+        AudioScapeStates currentState = state;
+
+        if (currentState == AudioScapeStates.INITIALIZING) {
+            disableAnnoyingJNativeHookLogsAndAddGlobalKeyListener();
+            createFullscrenVideoInterface();
+            setState(AudioScapeStates.CHOOSING_RANDOM_VIDEO);
+        } else if (currentState == AudioScapeStates.CHOOSING_RANDOM_VIDEO) {
+            chooseRandomVideo();
+            setState(AudioScapeStates.SHOWING_VIDEO);
+        } else if (currentState == AudioScapeStates.SHOWING_VIDEO) {
+            showVideo();
+        } else if (currentState == AudioScapeStates.PREPARE_INSTRUCTIONS) {
+            player.stop();
+            setState(AudioScapeStates.SHOWING_INSTRUCTIONS);
+        } else if (currentState == AudioScapeStates.SHOWING_INSTRUCTIONS) {
+            showingInstructions();
+        } else if (currentState == AudioScapeStates.PREPARE_FOR_RECORDING) {
+
+        } else if (currentState == AudioScapeStates.RECORDING) {
+
+        } else if (currentState == AudioScapeStates.PROCESSING) {
+
+        } else if (currentState == AudioScapeStates.SHOWING_RESULT) {
+
+        } else if (currentState == AudioScapeStates.CLEANUP_ON_ERROR) {
+
         }
 
-        @Override
-        public void nativeKeyPressed(NativeKeyEvent e) {
-            if ((currentState == STATE_WAITING_USER_PRESS) && (e.getKeyCode() == NativeKeyEvent.VC_SPACE)) {
-                currentState = STATE_RECORDING;
-            }
-        }
+    }
 
-        @Override
-        public void nativeKeyReleased(NativeKeyEvent e) {
-            if ((currentState == STATE_RECORDING) && (e.getKeyCode() == NativeKeyEvent.VC_SPACE)) {
-                currentState = STATE_PROCESSING;
-            }
+    private void createFullscrenVideoInterface() {
+        player = new VideoPlayer();
+    }
+
+    private void chooseRandomVideo() throws Exception {
+        File randomSession = Util.randomFileInDirectory(RESULTS_DIRECTORY);
+        if (randomSession == null) {
+            setState(AudioScapeStates.SHOWING_INSTRUCTIONS);
+            return;
+        }
+        File randomVideo = Util.randomFileInDirectory(new File(randomSession, "mix")); //TODO não pode repetir o mesmo...
+        player.stop();
+        player.prepare(randomVideo.getAbsolutePath());
+        player.start();
+    }
+
+    private void showVideo() throws Exception {
+        if (!player.isPlaying()) {
+            setState(AudioScapeStates.CHOOSING_RANDOM_VIDEO);
+        }
+    }
+
+    private void showingInstructions() throws Exception {
+        if (!player.isPlaying()) {
+            player.stop();
+            player.prepare("videos/instructions.mp4");
+            player.start();
+        }
+    }
+
+    private void showingPrepareForRecording() throws Exception {
+        if (!player.isPlaying()) {
+            player.stop();
+            player.prepare("videos/prepare.mp4");
+            player.start();
         }
     }
 
     public void flow() throws Exception {
-
-        // Get the logger for "org.jnativehook" and set the level to warning.
-        Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
-        logger.setLevel(Level.WARNING);
-
-// Don't forget to disable the parent handlers.
-        logger.setUseParentHandlers(false);
-
-        try {
-            GlobalScreen.registerNativeHook();
-        } catch (NativeHookException ex) {
-            System.err.println("There was a problem registering the native hook.");
-            System.err.println(ex.getMessage());
-            System.exit(1);
-        }
-        GlobalScreen.addNativeKeyListener(new GlobalKeyListener());
 
 
         //CREATE SESSION ID
@@ -89,17 +122,17 @@ public class AudioScape {
         Util.createDirForFile(userVideoFilename);
         VideoRecorder videoRecorder = new VideoRecorder(config.recorderVideo, config.recorderAudio, userVideoFilename);
 
-        while (currentState == STATE_WAITING_USER_PRESS) {
-            Thread.sleep(100);
-        }
+        //while (state == STATE_WAITING_USER_PRESS) {
+        //    Thread.sleep(100);
+        //}
 
         videoRecorder.start();
 
         //TODO elapsed too small throw message and retry
 
-        while (currentState == STATE_RECORDING) {
-            Thread.sleep(100);
-        }
+        //while (state == STATE_RECORDING) {
+        //     Thread.sleep(100);
+        // }
         videoRecorder.stop();
 
         GlobalScreen.unregisterNativeHook();
@@ -171,11 +204,81 @@ public class AudioScape {
     }
 
 
+    private void disableAnnoyingJNativeHookLogsAndAddGlobalKeyListener() {
+        Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
+        logger.setLevel(Level.WARNING);
+        logger.setUseParentHandlers(false);
+        try {
+            GlobalScreen.registerNativeHook();
+        } catch (NativeHookException ex) {
+            System.err.println("There was a problem registering the native hook.");
+            System.err.println(ex.getMessage());
+            System.exit(1);
+        }
+        GlobalScreen.addNativeKeyListener(new AudioScapeKeyListener());
+    }
+
+
+    public class AudioScapeKeyListener implements NativeKeyListener {
+        @Override
+        public void nativeKeyTyped(NativeKeyEvent e) {
+
+        }
+
+        @Override
+        public void nativeKeyPressed(NativeKeyEvent e) {
+
+
+            /*if ((AudioScape.state == STATE_WAITING_USER_PRESS) && (e.getKeyCode() == NativeKeyEvent.VC_SPACE)) {
+                state = STATE_RECORDING;
+            }*/
+        }
+
+        @Override
+        public void nativeKeyReleased(NativeKeyEvent e) {
+            if (e.getKeyCode() == NativeKeyEvent.VC_F) {
+                if (player.isFullscreen())
+                    player.disableFullScreen();
+                else
+                    player.enableFullScreen();
+            }
+            if (isInState(AudioScapeStates.PREPARE_INSTRUCTIONS) || isInState(AudioScapeStates.SHOWING_INSTRUCTIONS)) {
+                if (e.getKeyCode() == NativeKeyEvent.VC_O) {
+                    setState(AudioScapeStates.CHOOSING_RANDOM_VIDEO);
+                }
+            } else if (isInState(AudioScapeStates.CHOOSING_RANDOM_VIDEO) || isInState(AudioScapeStates.SHOWING_VIDEO)) {
+                if (e.getKeyCode() == NativeKeyEvent.VC_P) {
+                    setState(AudioScapeStates.PREPARE_INSTRUCTIONS);
+                }
+            }
+            /*if ((state == STATE_RECORDING) && (e.getKeyCode() == NativeKeyEvent.VC_SPACE)) {
+                state = STATE_PROCESSING;
+            }*/
+        }
+
+
+    }
+
+    private boolean isInState(AudioScapeStates currentState) {
+        return AudioScape.state == currentState;
+    }
+
+    private void setState(AudioScapeStates currentState) {
+        System.out.println("CHANGING STATE FROM " + AudioScape.state + " TO " + currentState);
+        AudioScape.state = currentState;
+    }
+
+
     public static void main(String[] args) throws Exception {
         AudioScape scape = new AudioScape();
-        scape.flow();
+
+        while (true) {
+            scape.loop();
+        }
 
     }
 
     static Random random = new Random();
+
+
 }

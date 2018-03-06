@@ -1,0 +1,5 @@
+file images/as2.png
+duration 1.0
+file images/as3.png
+duration 1.0
+file images/as3.png

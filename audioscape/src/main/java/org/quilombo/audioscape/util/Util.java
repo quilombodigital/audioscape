@@ -6,6 +6,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Random;
 
 public class Util {
 
@@ -48,6 +49,15 @@ public class Util {
                 audioFilename
         );
         return Double.parseDouble(result);
+    }
+
+    static Random random= new Random();
+
+    public static File randomFileInDirectory(File file){
+        File[] files = file.listFiles();
+        if (file==null)
+            return null;
+        return files[random.nextInt(files.length)];
     }
 
 }

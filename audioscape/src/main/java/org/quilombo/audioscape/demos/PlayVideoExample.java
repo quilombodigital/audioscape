@@ -9,11 +9,12 @@ import uk.co.caprica.vlcj.player.embedded.videosurface.CanvasVideoSurface;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 
 public class PlayVideoExample {
 
     public static void main(String[] args) {
-        NativeLibrary.addSearchPath("libvlc", "F:\\mostradearte\\audioscape\\tools\\vlc-2.2.8");
+        NativeLibrary.addSearchPath("libvlc", new File("tools\\vlc-2.2.8").getAbsolutePath());
         boolean found = new NativeDiscovery().discover();
         System.out.println(found);
         System.out.println(LibVlc.INSTANCE.libvlc_get_version());
@@ -42,7 +43,7 @@ public class PlayVideoExample {
         // Reproduce el vídeo.
         frame.setVisible(true);
 
-        mediaPlayer.prepareMedia("output_with_audio.mp4");
+        mediaPlayer.prepareMedia("data\\result\\37b7cab9-f5b9-4340-8f7f-56a2239c8914\\mix\\mix_0.mp4");
         mediaPlayer.setRepeat(true);
         mediaPlayer.start();
     }

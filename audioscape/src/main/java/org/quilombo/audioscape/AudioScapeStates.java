@@ -1,0 +1,15 @@
+package org.quilombo.audioscape;
+
+public enum AudioScapeStates {
+
+    INITIALIZING,
+    CHOOSING_RANDOM_VIDEO,
+    SHOWING_VIDEO,
+    PREPARE_INSTRUCTIONS,
+    SHOWING_INSTRUCTIONS,
+    PREPARE_FOR_RECORDING,
+    RECORDING,
+    PROCESSING,
+    SHOWING_RESULT,
+    CLEANUP_ON_ERROR
+}

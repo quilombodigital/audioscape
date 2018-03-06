@@ -1,0 +1,3 @@
+file images/as6.png
+duration 10.0
+file images/as6.png

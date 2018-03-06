@@ -1,0 +1,3 @@
+file images/as7.png
+duration 10.0
+file images/as7.png

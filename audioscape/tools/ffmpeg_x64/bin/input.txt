@@ -1,6 +1,0 @@
-file C:/tmp/texto5a.jpg
-duration 1.0
-file C:/tmp/texto5b.jpg
-duration 1.0
-file C:/tmp/texto5b.jpg
-duration 0.1
