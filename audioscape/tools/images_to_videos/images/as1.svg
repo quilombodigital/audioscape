@@ -26,8 +26,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.35"
-     inkscape:cx="442.02879"
-     inkscape:cy="-1788.391"
+     inkscape:cx="-59.399781"
+     inkscape:cy="-2816.9624"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -44,7 +44,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -83,11 +83,11 @@
          style="fill:#ffffff"
          id="flowPara4176">2. Visualize uma cena com ela</flowPara><flowPara
          id="flowPara4154"
-         style="fill:#ffffff"></flowPara><flowPara
+         style="fill:#ffffff" /><flowPara
          style="fill:#ffffff"
          id="flowPara4180">3. Pressione o botão e mantenha pressionado</flowPara><flowPara
          style="fill:#ffffff"
-         id="flowPara4182"></flowPara><flowPara
+         id="flowPara4182" /><flowPara
          style="fill:#ffffff"
          id="flowPara4184">4. Ao aparecer 'GRAVANDO', <flowSpan
    style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold'"
@@ -109,7 +109,7 @@
            height="304.28571"
            x="-245.71428"
            y="236.64792" /></flowRegion><flowPara
-         id="flowPara4168"></flowPara></flowRoot>    <flowRoot
+         id="flowPara4168" /></flowRoot>    <flowRoot
        xml:space="preserve"
        id="flowRoot4186"
        style="fill:black;stroke:none;stroke-opacity:1;stroke-width:1px;stroke-linejoin:miter;stroke-linecap:butt;fill-opacity:1;font-family:sans-serif;font-style:normal;font-weight:normal;font-size:40px;line-height:125%;letter-spacing:0px;word-spacing:0px"><flowRegion
@@ -119,7 +119,7 @@
            height="51.42857"
            x="-171.42857"
            y="706.64795" /></flowRegion><flowPara
-         id="flowPara4192"></flowPara></flowRoot>    <rect
+         id="flowPara4192" /></flowRoot>    <rect
        style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:3;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="rect4136-3"
        width="1280"
@@ -306,14 +306,14 @@
          sodipodi:role="line"
          id="tspan4664"
          x="1082.8571"
-         y="2672.3623"></tspan></text>
+         y="2672.3623" /></text>
     <rect
        style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:3;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="rect4136-7-5-7"
        width="1280"
        height="720"
-       x="-817.14282"
-       y="3060.9336"
+       x="-1608.5714"
+       y="3035.2192"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
     <flowRoot
@@ -334,7 +334,7 @@
        xml:space="preserve"
        id="flowRoot4763"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       transform="translate(5.7142857,60)"
+       transform="translate(-785.71429,34.285714)"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90"><flowRegion
          id="flowRegion4765"><rect
@@ -353,5 +353,55 @@
          id="flowPara4791"
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:70px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';text-align:center;text-anchor:middle;fill:#d45500">OU</flowPara><flowPara
          id="flowPara4793"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:70px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';text-align:center;text-anchor:middle;fill:#d45500">2 VEZES PARA DESCARTAR</flowPara></flowRoot>  </g>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:70px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';text-align:center;text-anchor:middle;fill:#d45500">2 VEZES PARA DESCARTAR</flowPara></flowRoot>    <rect
+       style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:3;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect4136-7-5-7-4"
+       width="1280"
+       height="720"
+       x="-94.285721"
+       y="3086.6479"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4763-7"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       transform="translate(728.57139,214.28575)"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><flowRegion
+         id="flowRegion4765-4"><rect
+           id="rect4767-9"
+           width="1540"
+           height="777.14294"
+           x="-945.71429"
+           y="3089.5051" /></flowRegion><flowPara
+         id="flowPara4783-4" /><flowPara
+         id="flowPara4793-4"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:70px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';text-align:center;text-anchor:middle;fill:#00ffff">SESSÃO REGISTRADA</flowPara><flowPara
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:70px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';text-align:center;text-anchor:middle;fill:#00ffff"
+         id="flowPara4300">OBRIGADO!</flowPara></flowRoot>    <rect
+       style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:3;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect4136-7-5-7-2"
+       width="1280"
+       height="720"
+       x="-705.71429"
+       y="3903.7908"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4763-8"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       transform="translate(122.85711,1062.8572)"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><flowRegion
+         id="flowRegion4765-3"><rect
+           id="rect4767-2"
+           width="1540"
+           height="777.14294"
+           x="-945.71429"
+           y="3089.5051" /></flowRegion><flowPara
+         id="flowPara4783-2" /><flowPara
+         id="flowPara4793-7"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:70px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';text-align:center;text-anchor:middle;fill:#00ffff">SESSÃO DESCARTADA</flowPara></flowRoot>  </g>
 </svg>

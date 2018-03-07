@@ -5,3 +5,5 @@
 ..\ffmpeg_x64\bin\ffmpeg -y -v error -f concat -safe 0 -noautorotate -i input5.txt -strict experimental -vcodec libx264 -vf scale=1280:720 ..\..\videos\maxtime.mp4
 ..\ffmpeg_x64\bin\ffmpeg -y -v error -f concat -safe 0 -noautorotate -i input6.txt -strict experimental -vcodec libx264 -vf scale=1280:720 ..\..\videos\approve.mp4
 ..\ffmpeg_x64\bin\ffmpeg -y -v error -f concat -safe 0 -noautorotate -i input7.txt -strict experimental -vcodec libx264 -vf scale=1280:720 ..\..\videos\attention.mp4
+..\ffmpeg_x64\bin\ffmpeg -y -v error -f concat -safe 0 -noautorotate -i input8.txt -strict experimental -vcodec libx264 -vf scale=1280:720 ..\..\videos\approve_yes.mp4
+..\ffmpeg_x64\bin\ffmpeg -y -v error -f concat -safe 0 -noautorotate -i input9.txt -strict experimental -vcodec libx264 -vf scale=1280:720 ..\..\videos\approve_no.mp4

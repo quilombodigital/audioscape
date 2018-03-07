@@ -39,8 +39,14 @@ public class AudioScape {
         config = AudioScapeConfig.load();
     }
 
+    AudioScapeStates lastState = AudioScapeStates.INITIALIZING;
+
     public void loop() throws Exception {
 
+        if (lastState != state) {
+            isFirstStateExecution = true;
+            lastState = state;
+        }
         AudioScapeStates currentState = state;
 
         if (currentState == AudioScapeStates.INITIALIZING) {
@@ -51,24 +57,70 @@ public class AudioScape {
             chooseRandomVideo();
             setState(AudioScapeStates.SHOWING_VIDEO);
         } else if (currentState == AudioScapeStates.SHOWING_VIDEO) {
-            showVideo();
-        } else if (currentState == AudioScapeStates.PREPARE_INSTRUCTIONS) {
-            player.stop();
-            setState(AudioScapeStates.SHOWING_INSTRUCTIONS);
+            if (!player.isPlaying()) {
+                setState(AudioScapeStates.CHOOSING_RANDOM_VIDEO);
+            }
         } else if (currentState == AudioScapeStates.SHOWING_INSTRUCTIONS) {
-            showingInstructions();
-        } else if (currentState == AudioScapeStates.PREPARE_FOR_RECORDING) {
-
+            showVideoLoop("videos/instructions.mp4");
+        } else if (currentState == AudioScapeStates.ATTENTION) {
+            showVideoLoop("videos/attention.mp4");
+            if (elapsedInState() > 4000)
+                setState(AudioScapeStates.RECORDING);
         } else if (currentState == AudioScapeStates.RECORDING) {
-
+            if (isFirstStateExecution) {
+                createUserSession();
+                startRecording();
+            }
+            showVideoLoop("videos/recording.mp4");
         } else if (currentState == AudioScapeStates.PROCESSING) {
-
+            if (isFirstStateExecution) {
+                stopRecording();
+                startProcessing();
+            }
+            if (!processingThread.running) {
+                if (processingThread.errors) {
+                    setState(AudioScapeStates.CLEANUP_ON_ERROR);
+                } else {
+                    setState(AudioScapeStates.SHOWING_RESULT);
+                }
+            }
+            showVideoLoop("videos/processing.mp4");
         } else if (currentState == AudioScapeStates.SHOWING_RESULT) {
-
+            if (isFirstStateExecution) {
+                File randomVideo = Util.randomFileInDirectory(new File("data/result/" + sessionId + "/mix"));
+                player.stop();
+                player.prepare(randomVideo.getAbsolutePath());
+                player.start();
+            } else {
+                if (!player.isPlaying()) {
+                    setState(AudioScapeStates.APPROVE);
+                }
+            }
+        } else if (currentState == AudioScapeStates.APPROVE) {
+            showVideoLoop("videos/approve.mp4");
+        } else if (currentState == AudioScapeStates.APPROVE_YES) {
+            showVideoLoop("videos/approve_yes.mp4");
+            if (elapsedInState() > 5000)
+                setState(AudioScapeStates.CHOOSING_RANDOM_VIDEO);
+        } else if (currentState == AudioScapeStates.APPROVE_NO) {
+            if (isFirstStateExecution) {
+                cleanUserSession(sessionId.toString());
+            }
+            showVideoLoop("videos/approve_no.mp4");
+            if (elapsedInState() > 5000)
+                setState(AudioScapeStates.CHOOSING_RANDOM_VIDEO);
         } else if (currentState == AudioScapeStates.CLEANUP_ON_ERROR) {
-
+            if (isFirstStateExecution) {
+                cleanUserSession(sessionId.toString());
+            }
         }
+        isFirstStateExecution = false;
+    }
 
+    long startTime = System.currentTimeMillis();
+
+    public long elapsedInState() {
+        return System.currentTimeMillis() - startTime;
     }
 
     private void createFullscrenVideoInterface() {
@@ -81,128 +133,155 @@ public class AudioScape {
             setState(AudioScapeStates.SHOWING_INSTRUCTIONS);
             return;
         }
-        File randomVideo = Util.randomFileInDirectory(new File(randomSession, "mix")); //TODO não pode repetir o mesmo...
+        File mixDirectory = new File(randomSession, "mix");
+        if (!mixDirectory.exists()) {
+            cleanUserSession(randomSession.getName());
+            return;
+        }
+        File randomVideo = Util.randomFileInDirectory(mixDirectory); //TODO não pode repetir o mesmo...
         player.stop();
         player.prepare(randomVideo.getAbsolutePath());
         player.start();
     }
 
-    private void showVideo() throws Exception {
-        if (!player.isPlaying()) {
-            setState(AudioScapeStates.CHOOSING_RANDOM_VIDEO);
-        }
-    }
+    boolean isFirstStateExecution = true;
 
-    private void showingInstructions() throws Exception {
+    private void showVideoLoop(String filename) throws Exception {
+        if (isFirstStateExecution) {
+            player.stop();
+        }
         if (!player.isPlaying()) {
             player.stop();
-            player.prepare("videos/instructions.mp4");
+            player.prepare(filename);
             player.start();
         }
     }
 
-    private void showingPrepareForRecording() throws Exception {
-        if (!player.isPlaying()) {
-            player.stop();
-            player.prepare("videos/prepare.mp4");
-            player.start();
-        }
-    }
+    UUID sessionId;
+    String recordResultDirectory;
+    VideoRecorder videoRecorder;
+    String userVideoFilename;
+    ProcessingThread processingThread;
 
-    public void flow() throws Exception {
-
-
-        //CREATE SESSION ID
-        UUID sessionId = UUID.randomUUID();
-        String recordResultDirectory = "data/result/" + sessionId + "/record";
+    public void createUserSession() {
+        sessionId = UUID.randomUUID();
+        recordResultDirectory = "data/result/" + sessionId + "/record";
         new File(recordResultDirectory).mkdirs();
-
-        //RECORD USER HERE
-        String userVideoFilename = recordResultDirectory + "/record.flv";
-        Util.createDirForFile(userVideoFilename);
-        VideoRecorder videoRecorder = new VideoRecorder(config.recorderVideo, config.recorderAudio, userVideoFilename);
-
-        //while (state == STATE_WAITING_USER_PRESS) {
-        //    Thread.sleep(100);
-        //}
-
-        videoRecorder.start();
-
-        //TODO elapsed too small throw message and retry
-
-        //while (state == STATE_RECORDING) {
-        //     Thread.sleep(100);
-        // }
-        videoRecorder.stop();
-
-        GlobalScreen.unregisterNativeHook();
-
-        //PROCESSING STARTS HERE
-
-        //EXTRACT AUDIO FROM VIDEO
-        String userAudioFilename = recordResultDirectory + "/audio.wav";
-        VideoAudioUtils.extractAudioFromVideo(userVideoFilename, userAudioFilename, config.recorderAudio);
-
-        //CONVERT AUDIO TO TEXT
-        SpeechToText stt = new SpeechToText();
-        String transcription = stt.convert(config.recorderAudio, userAudioFilename);
-
-        String userTranscriptFilename = recordResultDirectory + "/transcription.txt";
-        Util.writeToFile(transcription, userTranscriptFilename);
-
-        //EXTRACT EMOTION DATA
-        TextAnalysisConfig textAnalysisConfig = TextAnalysisConfig.load();
-        TextAnalysis tte = new TextAnalysis(textAnalysisConfig);
-        String emotionResult = tte.getEmotion(10, transcription);
-        String userEmotionFilename = recordResultDirectory + "/emotion.txt";
-        Util.writeToFile(emotionResult, userEmotionFilename);
-
-        //DOWNLOAD ALL WORDS IN TRANSCRIPTION
-
-        Downloader down = new Downloader();
-        String[] words = transcription.trim().split(" ");
-        for (String word : words) {
-            File directory = new File("data/download/" + word);
-            if (!directory.exists()) {
-                System.out.println("downloading: " + word);
-                ArrayList<Googler> queries = new ArrayList<>();
-                Googler query = new Googler();
-                query.setQuery(word).setOption().setFileType(FILE_TYPE_KEY_JPG).setSize(SIZE_KEY_MEDIUM, null, 0, 0);
-                queries.add(query);
-                down.SAVE_PATH = "data/download/";
-                down.download(new DownloaderConfig(), queries);
-            }
-        }
-
-        //CHOOSE WORD IMAGES TO GENERATE VIDEO, and generate 3 versions
-        String versionsDirectory = "data/result/" + sessionId + "/versions";
-        for (int t = 0; t < 3; t++) {
-            File target = new File(versionsDirectory + "/version_" + t);
-            target.mkdirs();
-            int count = 0;
-            for (String word : words) {
-                count++;
-                File directory = new File("data/download/" + word);
-                File[] files = directory.listFiles();
-                File randomFile = files[random.nextInt(files.length)];
-                Files.copy(randomFile, new File(target, "image_" + count + ".jpg"));
-            }
-        }
-
-        // MIX AUDIO, AND IMAGES
-
-        VideoMixer mixer = new VideoMixer();
-        for (int t = 0; t < 3; t++) {
-            String mixFilename = "data/result/" + sessionId + "/mix/mix_" + t + ".mp4";
-            String slideFilename = "data/result/" + sessionId + "/slide/slide_" + t + ".mp4";
-            Util.createDirForFile(mixFilename);
-            Util.createDirForFile(slideFilename);
-            mixer.mix(transcription, versionsDirectory + "/version_" + t, userAudioFilename, slideFilename, mixFilename);
-        }
-
-        System.out.println("THE END");
     }
 
+    public void cleanUserSession(String sessionId) throws Exception {
+        deleteDirectory(new File("data/result/" + sessionId));
+    }
+
+    public void startRecording() throws Exception {
+        userVideoFilename = recordResultDirectory + "/record.flv";
+        Util.createDirForFile(userVideoFilename);
+        videoRecorder = new VideoRecorder(config.recorderVideo, config.recorderAudio, userVideoFilename);
+        videoRecorder.start();
+    }
+
+    public void stopRecording() throws Exception {
+        videoRecorder.stop();
+    }
+
+    public void startProcessing() throws Exception {
+        processingThread = new ProcessingThread();
+        processingThread.setDaemon(true);
+        processingThread.start();
+        while (processingThread.running == false) {
+            Thread.sleep(10);
+        }
+    }
+
+
+    public class ProcessingThread extends Thread {
+        public boolean running = false;
+        public boolean errors = false;
+
+        public void run() {
+            running = true;
+            try {
+                //PROCESSING STARTS HERE
+
+                //EXTRACT AUDIO FROM VIDEO
+                String userAudioFilename = recordResultDirectory + "/audio.wav";
+                VideoAudioUtils.extractAudioFromVideo(userVideoFilename, userAudioFilename, config.recorderAudio);
+
+                //CONVERT AUDIO TO TEXT
+                SpeechToText stt = new SpeechToText();
+                String transcription = stt.convert(config.recorderAudio, userAudioFilename);
+
+                String userTranscriptFilename = recordResultDirectory + "/transcription.txt";
+                Util.writeToFile(transcription, userTranscriptFilename);
+
+                //EXTRACT EMOTION DATA
+                TextAnalysisConfig textAnalysisConfig = TextAnalysisConfig.load();
+                TextAnalysis tte = new TextAnalysis(textAnalysisConfig);
+                String emotionResult = tte.getEmotion(10, transcription);
+                String userEmotionFilename = recordResultDirectory + "/emotion.txt";
+                Util.writeToFile(emotionResult, userEmotionFilename);
+
+                //DOWNLOAD ALL WORDS IN TRANSCRIPTION
+
+                Downloader down = new Downloader();
+                String[] words = transcription.trim().split(" ");
+                for (String word : words) {
+                    File directory = new File("data/download/" + word);
+                    if (!directory.exists()) {
+                        System.out.println("downloading: " + word);
+                        ArrayList<Googler> queries = new ArrayList<>();
+                        Googler query = new Googler();
+                        query.setQuery(word).setOption().setFileType(FILE_TYPE_KEY_JPG).setSize(SIZE_KEY_MEDIUM, null, 0, 0);
+                        queries.add(query);
+                        down.SAVE_PATH = "data/download/";
+                        down.download(new DownloaderConfig(), queries);
+                    }
+                }
+
+                //CHOOSE WORD IMAGES TO GENERATE VIDEO, and generate 3 versions
+                String versionsDirectory = "data/result/" + sessionId + "/versions";
+                for (int t = 0; t < 3; t++) {
+                    File target = new File(versionsDirectory + "/version_" + t);
+                    target.mkdirs();
+                    int count = 0;
+                    for (String word : words) {
+                        count++;
+                        File directory = new File("data/download/" + word);
+                        File[] files = directory.listFiles();
+                        File randomFile = files[random.nextInt(files.length)];
+                        Files.copy(randomFile, new File(target, "image_" + count + ".jpg"));
+                    }
+                }
+
+                // MIX AUDIO, AND IMAGES
+
+                VideoMixer mixer = new VideoMixer();
+                for (int t = 0; t < 3; t++) {
+                    String mixFilename = "data/result/" + sessionId + "/mix/mix_" + t + ".mp4";
+                    String slideFilename = "data/result/" + sessionId + "/slide/slide_" + t + ".mp4";
+                    Util.createDirForFile(mixFilename);
+                    Util.createDirForFile(slideFilename);
+                    mixer.mix(transcription, versionsDirectory + "/version_" + t, userAudioFilename, slideFilename, mixFilename);
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                errors = true;
+            }
+            System.out.println("THE END");
+            running = false;
+        }
+    }
+
+    boolean deleteDirectory(File directoryToBeDeleted) {
+        File[] allContents = directoryToBeDeleted.listFiles();
+        if (allContents != null) {
+            for (File file : allContents) {
+                deleteDirectory(file);
+            }
+        }
+        return directoryToBeDeleted.delete();
+    }
 
     private void disableAnnoyingJNativeHookLogsAndAddGlobalKeyListener() {
         Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
@@ -228,10 +307,6 @@ public class AudioScape {
         @Override
         public void nativeKeyPressed(NativeKeyEvent e) {
 
-
-            /*if ((AudioScape.state == STATE_WAITING_USER_PRESS) && (e.getKeyCode() == NativeKeyEvent.VC_SPACE)) {
-                state = STATE_RECORDING;
-            }*/
         }
 
         @Override
@@ -242,18 +317,32 @@ public class AudioScape {
                 else
                     player.enableFullScreen();
             }
-            if (isInState(AudioScapeStates.PREPARE_INSTRUCTIONS) || isInState(AudioScapeStates.SHOWING_INSTRUCTIONS)) {
+            if (isInState(AudioScapeStates.CHOOSING_RANDOM_VIDEO) || isInState(AudioScapeStates.SHOWING_VIDEO)) {
+                if (e.getKeyCode() == NativeKeyEvent.VC_P) {
+                    setState(AudioScapeStates.SHOWING_INSTRUCTIONS);
+                }
+            } else if (isInState(AudioScapeStates.SHOWING_INSTRUCTIONS)) {
                 if (e.getKeyCode() == NativeKeyEvent.VC_O) {
                     setState(AudioScapeStates.CHOOSING_RANDOM_VIDEO);
+                } else if (e.getKeyCode() == NativeKeyEvent.VC_L) {
+                    setState(AudioScapeStates.ATTENTION);
                 }
-            } else if (isInState(AudioScapeStates.CHOOSING_RANDOM_VIDEO) || isInState(AudioScapeStates.SHOWING_VIDEO)) {
-                if (e.getKeyCode() == NativeKeyEvent.VC_P) {
-                    setState(AudioScapeStates.PREPARE_INSTRUCTIONS);
+            } else if (isInState(AudioScapeStates.ATTENTION)) {
+                if (e.getKeyCode() == NativeKeyEvent.VC_K) {
+                    setState(AudioScapeStates.SHOWING_INSTRUCTIONS);
+                }
+            } else if (isInState(AudioScapeStates.RECORDING)) {
+                if (e.getKeyCode() == NativeKeyEvent.VC_K) {
+                    setState(AudioScapeStates.PROCESSING);
+                }
+            } else if (isInState(AudioScapeStates.APPROVE)) {
+                if (e.getKeyCode() == NativeKeyEvent.VC_M) {
+                    setState(AudioScapeStates.APPROVE_YES);
+                } else if (e.getKeyCode() == NativeKeyEvent.VC_N) {
+                    setState(AudioScapeStates.APPROVE_NO);
                 }
             }
-            /*if ((state == STATE_RECORDING) && (e.getKeyCode() == NativeKeyEvent.VC_SPACE)) {
-                state = STATE_PROCESSING;
-            }*/
+
         }
 
 
@@ -265,6 +354,7 @@ public class AudioScape {
 
     private void setState(AudioScapeStates currentState) {
         System.out.println("CHANGING STATE FROM " + AudioScape.state + " TO " + currentState);
+        startTime = System.currentTimeMillis();
         AudioScape.state = currentState;
     }
 
@@ -274,6 +364,7 @@ public class AudioScape {
 
         while (true) {
             scape.loop();
+            Thread.sleep(10);
         }
 
     }
