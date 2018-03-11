@@ -6,12 +6,12 @@ import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
-import org.quilombo.audioscape.analysis.TextAnalysis;
-import org.quilombo.audioscape.analysis.TextAnalysisConfig;
 import org.quilombo.audioscape.download.Downloader;
 import org.quilombo.audioscape.download.DownloaderConfig;
 import org.quilombo.audioscape.gui.VideoPlayer;
+import org.quilombo.audioscape.gui.Words;
 import org.quilombo.audioscape.speech.SpeechToText;
+import org.quilombo.audioscape.util.ImageConverter;
 import org.quilombo.audioscape.util.Util;
 import org.quilombo.audioscape.video.VideoAudioUtils;
 import org.quilombo.audioscape.video.VideoRecorder;
@@ -34,12 +34,19 @@ public class AudioScape {
     public static AudioScapeStates state = AudioScapeStates.INITIALIZING;
     private AudioScapeConfig config;
     private VideoPlayer player;
+    private String lastProcessionVideo = null;
 
     public AudioScape() throws Exception {
         config = AudioScapeConfig.load();
     }
 
     AudioScapeStates lastState = AudioScapeStates.INITIALIZING;
+
+    private UUID lastSessionId;
+    private int lastSessionRepeatCounter = 0;
+    private boolean lastSessionAlternateFlag;
+
+    private String currentProcessingVideo = "videos/processing.mp4";
 
     public void loop() throws Exception {
 
@@ -54,7 +61,13 @@ public class AudioScape {
             createFullscrenVideoInterface();
             setState(AudioScapeStates.CHOOSING_RANDOM_VIDEO);
         } else if (currentState == AudioScapeStates.CHOOSING_RANDOM_VIDEO) {
-            chooseRandomVideo();
+            if (lastSessionId != null && lastSessionAlternateFlag && lastSessionRepeatCounter < 3) {
+                lastSessionRepeatCounter++;
+                repeatLastSession();
+            } else {
+                chooseRandomVideo();
+            }
+            lastSessionAlternateFlag = !lastSessionAlternateFlag;
             setState(AudioScapeStates.SHOWING_VIDEO);
         } else if (currentState == AudioScapeStates.SHOWING_VIDEO) {
             if (!player.isPlaying()) {
@@ -84,7 +97,11 @@ public class AudioScape {
                     setState(AudioScapeStates.SHOWING_RESULT);
                 }
             }
-            showVideoLoop("videos/processing.mp4");
+            if (!currentProcessingVideo.equals(lastProcessionVideo)) {
+                lastProcessionVideo = currentProcessingVideo;
+                player.stop();
+            }
+            showVideoLoop(currentProcessingVideo);
         } else if (currentState == AudioScapeStates.SHOWING_RESULT) {
             if (isFirstStateExecution) {
                 File randomVideo = Util.randomFileInDirectory(new File("data/result/" + sessionId + "/mix"));
@@ -113,6 +130,7 @@ public class AudioScape {
             if (isFirstStateExecution) {
                 cleanUserSession(sessionId.toString());
             }
+            setState(AudioScapeStates.CHOOSING_RANDOM_VIDEO);
         }
         isFirstStateExecution = false;
     }
@@ -133,14 +151,23 @@ public class AudioScape {
             setState(AudioScapeStates.SHOWING_INSTRUCTIONS);
             return;
         }
-        File mixDirectory = new File(randomSession, "mix");
+        playSessionMix(randomSession);
+    }
+
+    private void repeatLastSession() throws Exception {
+        File last = new File(RESULTS_DIRECTORY, lastSessionId.toString());
+        playSessionMix(last);
+    }
+
+    private void playSessionMix(File sessionDirectory) throws Exception {
+        File mixDirectory = new File(sessionDirectory, "mix");
         if (!mixDirectory.exists()) {
-            cleanUserSession(randomSession.getName());
+            cleanUserSession(sessionDirectory.getName());
             return;
         }
-        File randomVideo = Util.randomFileInDirectory(mixDirectory); //TODO não pode repetir o mesmo...
+        File mixVideo = Util.randomFileInDirectory(mixDirectory); //TODO não pode repetir o mesmo...
         player.stop();
-        player.prepare(randomVideo.getAbsolutePath());
+        player.prepare(mixVideo.getAbsolutePath());
         player.start();
     }
 
@@ -203,9 +230,13 @@ public class AudioScape {
             try {
                 //PROCESSING STARTS HERE
 
+                currentProcessingVideo = "videos/extracting.mp4";
+
                 //EXTRACT AUDIO FROM VIDEO
                 String userAudioFilename = recordResultDirectory + "/audio.wav";
                 VideoAudioUtils.extractAudioFromVideo(userVideoFilename, userAudioFilename, config.recorderAudio);
+
+                currentProcessingVideo = "videos/text_to_audio.mp4";
 
                 //CONVERT AUDIO TO TEXT
                 SpeechToText stt = new SpeechToText();
@@ -215,16 +246,20 @@ public class AudioScape {
                 Util.writeToFile(transcription, userTranscriptFilename);
 
                 //EXTRACT EMOTION DATA
-                TextAnalysisConfig textAnalysisConfig = TextAnalysisConfig.load();
-                TextAnalysis tte = new TextAnalysis(textAnalysisConfig);
-                String emotionResult = tte.getEmotion(10, transcription);
-                String userEmotionFilename = recordResultDirectory + "/emotion.txt";
-                Util.writeToFile(emotionResult, userEmotionFilename);
+
+                //disabled for now
+                //TextAnalysisConfig textAnalysisConfig = TextAnalysisConfig.load();
+                //TextAnalysis tte = new TextAnalysis(textAnalysisConfig);
+                //String emotionResult = tte.getEmotion(10, transcription);
+                //String userEmotionFilename = recordResultDirectory + "/emotion.txt";
+                //Util.writeToFile(emotionResult, userEmotionFilename);
+
+                currentProcessingVideo = "videos/downloading.mp4";
 
                 //DOWNLOAD ALL WORDS IN TRANSCRIPTION
-
                 Downloader down = new Downloader();
                 String[] words = transcription.trim().split(" ");
+                String wordcloud = "baixando palavras espere baixando palavras espere baixando palavras espere";
                 for (String word : words) {
                     File directory = new File("data/download/" + word);
                     if (!directory.exists()) {
@@ -235,6 +270,19 @@ public class AudioScape {
                         queries.add(query);
                         down.SAVE_PATH = "data/download/";
                         down.download(new DownloaderConfig(), queries);
+                    }
+                    wordcloud = wordcloud + " " + word;
+                    String wordsCloudFile = "data/result/" + sessionId + "/record/wordcloud.png";
+                    Words.generateCloud(wordcloud, wordsCloudFile);
+                    currentProcessingVideo = wordsCloudFile;
+                }
+
+
+                //SANITIZE ALL DOWNLOADED WORDS
+                for (String word : words) {
+                    File directory = new File("data/download/" + word);
+                    for (File tmp : directory.listFiles()) {
+                        ImageConverter.sanitizeJpgImage(tmp);
                     }
                 }
 
@@ -248,12 +296,15 @@ public class AudioScape {
                         count++;
                         File directory = new File("data/download/" + word);
                         File[] files = directory.listFiles();
-                        File randomFile = files[random.nextInt(files.length)];
-                        Files.copy(randomFile, new File(target, "image_" + count + ".jpg"));
+                        File versionFile = files[Math.min(t, files.length - 1)];
+                        String extension = Files.getFileExtension(versionFile.getName());
+                        Files.copy(versionFile, new File(target, "image_" + count + "." + extension.toLowerCase()));
                     }
                 }
 
                 // MIX AUDIO, AND IMAGES
+
+                currentProcessingVideo = "videos/mixing.mp4";
 
                 VideoMixer mixer = new VideoMixer();
                 for (int t = 0; t < 3; t++) {
@@ -263,6 +314,11 @@ public class AudioScape {
                     Util.createDirForFile(slideFilename);
                     mixer.mix(transcription, versionsDirectory + "/version_" + t, userAudioFilename, slideFilename, mixFilename);
                 }
+
+                //REPEAT LAT SESSION SOME TIMES
+                lastSessionId = sessionId;
+                lastSessionRepeatCounter = 0;
+                lastSessionAlternateFlag = true;
 
             } catch (Exception e) {
                 e.printStackTrace();

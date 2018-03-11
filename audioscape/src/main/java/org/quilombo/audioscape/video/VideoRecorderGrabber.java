@@ -2,13 +2,14 @@ package org.quilombo.audioscape.video;
 
 import org.bytedeco.javacv.Frame;
 import org.bytedeco.javacv.OpenCVFrameGrabber;
+import org.quilombo.audioscape.util.Util;
 
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 public class VideoRecorderGrabber extends Thread {
 
-    ScheduledThreadPoolExecutor exec = new ScheduledThreadPoolExecutor(1);
+    ScheduledThreadPoolExecutor exec = Util.createScheduledExecutor(1);
 
     private VideoRecorder videoRecorder;
     private OpenCVFrameGrabber grabber;

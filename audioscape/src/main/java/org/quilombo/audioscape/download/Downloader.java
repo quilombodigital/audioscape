@@ -9,12 +9,12 @@ import it.tadbir.net.SignalHtml;
 import it.tadbir.net.SignalImage;
 import org.apache.http.HttpEntity;
 import org.apache.http.util.EntityUtils;
+import org.quilombo.audioscape.util.Util;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import static it.tadbir.net.Google.Constants.Search.Image.FILE_TYPE_KEY_JPG;
 import static it.tadbir.net.Google.Constants.Search.Image.SIZE_KEY_MEDIUM;
@@ -39,7 +39,7 @@ public class Downloader {
         Jbase.initTracer();
 
         //init thread pool
-        es = Executors.newScheduledThreadPool(config.maxThreads);
+        es = Util.createScheduledExecutor(config.maxThreads);
 
         //make save folder
         File target = new File(SAVE_PATH);

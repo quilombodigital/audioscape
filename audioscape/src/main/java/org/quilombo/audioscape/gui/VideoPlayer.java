@@ -9,6 +9,8 @@ import uk.co.caprica.vlcj.player.embedded.videosurface.CanvasVideoSurface;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 
 public class VideoPlayer {
@@ -34,6 +36,13 @@ public class VideoPlayer {
         frame.setContentPane(contentPane);
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                mediaPlayer.release();
+                mediaPlayer = null;
+                System.exit(0); //calling the method is a must
+            }
+        });
         frame.setLocation(50, 50);
         frame.setSize(800, 600);
 
@@ -76,7 +85,7 @@ public class VideoPlayer {
         }
     }
 
-    public void pause(){
+    public void pause() {
         mediaPlayer.pause();
     }
 
@@ -97,10 +106,10 @@ public class VideoPlayer {
 
     public static void main(String[] args) throws InterruptedException {
         VideoPlayer player = new VideoPlayer();
-        player.prepare("data\\result\\37b7cab9-f5b9-4340-8f7f-56a2239c8914\\mix\\mix_0.mp4");
+        player.prepare("test.png");
         player.start();
         Thread.sleep(1500);
-        player.prepare("data\\result\\37b7cab9-f5b9-4340-8f7f-56a2239c8914\\mix\\mix_1.mp4");
+        player.prepare("test.png");
         player.start();
         player.waitForEnd();
         System.out.println("yes!!!");
@@ -109,4 +118,5 @@ public class VideoPlayer {
     public boolean isPlaying() {
         return mediaPlayer.isPlaying();
     }
+
 }

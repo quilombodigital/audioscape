@@ -2,11 +2,12 @@ package org.quilombo.audioscape.util;
 
 import com.google.common.io.Files;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.Random;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.ThreadFactory;
+import java.util.function.Consumer;
 
 public class Util {
 
@@ -51,13 +52,50 @@ public class Util {
         return Double.parseDouble(result);
     }
 
-    static Random random= new Random();
+    static Random random = new Random();
 
-    public static File randomFileInDirectory(File file){
+    public static File randomFileInDirectory(File file) {
         File[] files = file.listFiles();
-        if (file==null)
+        if (file == null || files.length == 0)
             return null;
         return files[random.nextInt(files.length)];
+    }
+
+    public static int execute(String command) throws Exception {
+        Process process = Runtime.getRuntime().exec(command);
+        StreamGobbler streamGobbler =
+                new StreamGobbler(process.getInputStream(), System.out::println);
+        Executors.newSingleThreadExecutor().submit(streamGobbler);
+        int exitCode = process.waitFor();
+        return exitCode;
+    }
+
+    private static class StreamGobbler implements Runnable {
+        private InputStream inputStream;
+        private Consumer<String> consumer;
+
+        public StreamGobbler(InputStream inputStream, Consumer<String> consumer) {
+            this.inputStream = inputStream;
+            this.consumer = consumer;
+        }
+
+        @Override
+        public void run() {
+            new BufferedReader(new InputStreamReader(inputStream)).lines()
+                    .forEach(consumer);
+        }
+    }
+
+    public static ScheduledThreadPoolExecutor createScheduledExecutor(int number) {
+        ScheduledThreadPoolExecutor pool = new ScheduledThreadPoolExecutor(number, new ThreadFactory() {
+            @Override
+            public Thread newThread(Runnable runnable) {
+                Thread thread = Executors.defaultThreadFactory().newThread(runnable);
+                thread.setDaemon(true);
+                return thread;
+            }
+        });
+        return pool;
     }
 
 }

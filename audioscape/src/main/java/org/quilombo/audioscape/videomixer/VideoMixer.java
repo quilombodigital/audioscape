@@ -43,7 +43,7 @@ public class VideoMixer {
         }
         //FFMPEG BUG, repeat last entry
         input = input + "file " + last.getAbsolutePath().replaceAll("\\\\", "/") + "\n";
-        //input = input + "duration 0";
+        input = input + "duration " + durations[count - 1];
 
         System.out.println(input);
         File tempInput = Util.tmpFile();

@@ -10,7 +10,8 @@ public class TextAnalysisConfig {
     public String sentimentPath;
     public String keyPhrasePath;
 
-    public TextAnalysisConfig(){}
+    public TextAnalysisConfig() {
+    }
 
     public static TextAnalysisConfig load() throws Exception {
         ObjectMapper mapper = new ObjectMapper();

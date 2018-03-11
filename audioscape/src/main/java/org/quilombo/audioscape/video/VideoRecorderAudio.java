@@ -1,5 +1,7 @@
 package org.quilombo.audioscape.video;
 
+import org.quilombo.audioscape.util.Util;
+
 import javax.sound.sampled.*;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -10,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 public class VideoRecorderAudio extends Thread {
 
     private VideoRecorder videoRecorder;
-    ScheduledThreadPoolExecutor exec = new ScheduledThreadPoolExecutor(1);
+    ScheduledThreadPoolExecutor exec = Util.createScheduledExecutor(1);
     boolean isRunning = false;
 
     public VideoRecorderAudio(VideoRecorder videoRecorder) {
