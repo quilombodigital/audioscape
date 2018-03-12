@@ -13,5 +13,7 @@ public enum AudioScapeStates {
     APPROVE,
     APPROVE_YES,
     APPROVE_NO,
+    SHOW_MINIMUM_TIME,
+    SHOW_MAXIMUM_TIME,
     CLEANUP_ON_ERROR
 }

@@ -2,23 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e5458e31-9db2-4288-bfa9-05f4bddcb31f" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tools/images_to_videos/images/as6.png" afterPath="$PROJECT_DIR$/tools/images_to_videos/images/as6.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tools/images_to_videos/images/as7.png" afterPath="$PROJECT_DIR$/tools/images_to_videos/images/as7.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tools/vlc-2.2.8/plugins/plugins.dat" afterPath="$PROJECT_DIR$/tools/vlc-2.2.8/plugins/plugins.dat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/videos/attention.mp4" afterPath="$PROJECT_DIR$/videos/attention.mp4" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/videos/maxtime.mp4" afterPath="$PROJECT_DIR$/videos/maxtime.mp4" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/videos/minimumtime.mp4" afterPath="$PROJECT_DIR$/videos/minimumtime.mp4" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/audioscape.iml" afterPath="$PROJECT_DIR$/audioscape.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/AudioScape.java" afterPath="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/AudioScape.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/analysis/TextAnalysisConfig.java" afterPath="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/analysis/TextAnalysisConfig.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/download/Downloader.java" afterPath="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/download/Downloader.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/download/DownloaderConfig.java" afterPath="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/download/DownloaderConfig.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/AudioScapeStates.java" afterPath="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/AudioScapeStates.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/gui/VideoPlayer.java" afterPath="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/gui/VideoPlayer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/gui/Words.java" afterPath="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/gui/Words.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/util/Util.java" afterPath="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/util/Util.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/video/VideoRecorderAudio.java" afterPath="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/video/VideoRecorderAudio.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/video/VideoRecorderGrabber.java" afterPath="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/video/VideoRecorderGrabber.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/video/VideoRecorder.java" afterPath="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/video/VideoRecorder.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/videomixer/VideoMixer.java" afterPath="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/videomixer/VideoMixer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tools/images_to_videos/generate.bat" afterPath="$PROJECT_DIR$/tools/images_to_videos/generate.bat" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tools/images_to_videos/images/as1.svg" afterPath="$PROJECT_DIR$/tools/images_to_videos/images/as1.svg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tools/images_to_videos/input7.txt" afterPath="$PROJECT_DIR$/tools/images_to_videos/input7.txt" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -33,8 +30,35 @@
       <file leaf-file-name="AudioScape.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/AudioScape.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="41" column="0" lean-forward="true" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
+            <state relative-caret-position="206">
+              <caret line="417" column="45" lean-forward="false" selection-start-line="417" selection-start-column="45" selection-end-line="417" selection-end-column="45" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="image_1.jpg" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/data/result/2de89123-667f-402f-871c-eea68eae068d/versions/version_0/image_1.jpg">
+          <provider selected="true" editor-type-id="images">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AudioScapeStates.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/AudioScapeStates.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="16" column="22" lean-forward="false" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Words.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/gui/Words.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="306">
+              <caret line="28" column="41" lean-forward="false" selection-start-line="28" selection-start-column="41" selection-end-line="28" selection-end-column="41" />
               <folding />
             </state>
           </provider>
@@ -43,41 +67,22 @@
       <file leaf-file-name="VideoPlayer.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/gui/VideoPlayer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1785">
-              <caret line="118" column="0" lean-forward="false" selection-start-line="118" selection-start-column="0" selection-end-line="118" selection-end-column="0" />
+            <state relative-caret-position="238">
+              <caret line="84" column="9" lean-forward="false" selection-start-line="84" selection-start-column="9" selection-end-line="84" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="VideoRecorder.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/video/VideoRecorder.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="89" column="29" lean-forward="false" selection-start-line="89" selection-start-column="16" selection-end-line="89" selection-end-column="29" />
               <folding>
-                <element signature="e#3726#3727#0" expanded="true" />
+                <element signature="e#2776#2777#0" expanded="true" />
+                <element signature="e#2839#2840#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="WebcamAndMicrophoneCapture.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/demos/WebcamAndMicrophoneCapture.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2278">
-              <caret line="146" column="20" lean-forward="false" selection-start-line="146" selection-start-column="20" selection-end-line="146" selection-end-column="20" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="VideoRecorderAudio.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/video/VideoRecorderAudio.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="14" column="71" lean-forward="false" selection-start-line="14" selection-start-column="39" selection-end-line="14" selection-end-column="71" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="VideoRecorderGrabber.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/video/VideoRecorderGrabber.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -85,8 +90,8 @@
       <file leaf-file-name="VideoMixer.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/videomixer/VideoMixer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1394">
-              <caret line="89" column="30" lean-forward="false" selection-start-line="89" selection-start-column="30" selection-end-line="89" selection-end-column="30" />
+            <state relative-caret-position="385">
+              <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -105,9 +110,12 @@
       <file leaf-file-name="Util.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/util/Util.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="56" column="23" lean-forward="false" selection-start-line="56" selection-start-column="23" selection-end-line="56" selection-end-column="23" />
-              <folding />
+            <state relative-caret-position="357">
+              <caret line="100" column="18" lean-forward="false" selection-start-line="100" selection-start-column="18" selection-end-line="100" selection-end-column="18" />
+              <folding>
+                <element signature="e#3422#3423#0" expanded="true" />
+                <element signature="e#3474#3475#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -123,11 +131,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>SAVE_PATH</find>
-      <find>ift</find>
-      <find>ext</find>
-      <find>dontRename</find>
-      <find>queries</find>
       <find>outputFilename</find>
       <find>som</find>
       <find>transcription</find>
@@ -153,6 +156,11 @@
       <find>scheduled</find>
       <find>es</find>
       <find>displaya</find>
+      <find>clean</find>
+      <find>&quot; +</find>
+      <find>slide</find>
+      <find>mix</find>
+      <find>session</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -174,7 +182,6 @@
         <option value="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/demos/QuickstartSample.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/video/VideoConfig.java" />
-        <option value="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/video/VideoRecorder.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/video/AudioConfig.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/emotion/Documents.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/emotion/Document.java" />
@@ -204,18 +211,19 @@
         <option value="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/demos/PlayVideoExample.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/GlobalKeyListener.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/AudioScapeKeyListener.java" />
-        <option value="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/AudioScapeStates.java" />
-        <option value="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/videomixer/VideoMixer.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/util/ImageConverter.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/download/DownloaderConfig.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/gui/WordCloud.java" />
-        <option value="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/gui/Words.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/video/VideoRecorderAudio.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/video/VideoRecorderGrabber.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/download/Downloader.java" />
-        <option value="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/util/Util.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/AudioScapeStates.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/gui/VideoPlayer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/video/VideoRecorder.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/videomixer/VideoMixer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/util/Util.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/gui/Words.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/AudioScape.java" />
       </list>
     </option>
@@ -297,43 +305,7 @@
               <item name="audioscape" type="b2602c69:ProjectViewProjectNode" />
               <item name="audioscape" type="462c0819:PsiDirectoryNode" />
               <item name="data" type="462c0819:PsiDirectoryNode" />
-              <item name="download" type="462c0819:PsiDirectoryNode" />
-              <item name="feliz" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="audioscape" type="b2602c69:ProjectViewProjectNode" />
-              <item name="audioscape" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-              <item name="download" type="462c0819:PsiDirectoryNode" />
-              <item name="mais" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="audioscape" type="b2602c69:ProjectViewProjectNode" />
-              <item name="audioscape" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-              <item name="download" type="462c0819:PsiDirectoryNode" />
-              <item name="tudo" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="audioscape" type="b2602c69:ProjectViewProjectNode" />
-              <item name="audioscape" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
               <item name="result" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="audioscape" type="b2602c69:ProjectViewProjectNode" />
-              <item name="audioscape" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-              <item name="result" type="462c0819:PsiDirectoryNode" />
-              <item name="312297a2-1dc5-4c6b-8c38-42ec0610114c" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="audioscape" type="b2602c69:ProjectViewProjectNode" />
-              <item name="audioscape" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-              <item name="result" type="462c0819:PsiDirectoryNode" />
-              <item name="312297a2-1dc5-4c6b-8c38-42ec0610114c" type="462c0819:PsiDirectoryNode" />
-              <item name="record" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="audioscape" type="b2602c69:ProjectViewProjectNode" />
@@ -445,19 +417,6 @@
             </path>
             <path>
               <item name="audioscape" type="b2602c69:ProjectViewProjectNode" />
-              <item name="audioscape" type="462c0819:PsiDirectoryNode" />
-              <item name="tools" type="462c0819:PsiDirectoryNode" />
-              <item name="images_to_videos" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="audioscape" type="b2602c69:ProjectViewProjectNode" />
-              <item name="audioscape" type="462c0819:PsiDirectoryNode" />
-              <item name="tools" type="462c0819:PsiDirectoryNode" />
-              <item name="images_to_videos" type="462c0819:PsiDirectoryNode" />
-              <item name="images" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="audioscape" type="b2602c69:ProjectViewProjectNode" />
               <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
             <path>
@@ -485,6 +444,14 @@
               <item name="rt.jar" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="awt" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="audioscape" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="&lt; 1.8 &gt;" type="70bed36:NamedLibraryElementNode" />
+              <item name="rt.jar" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="io" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="audioscape" type="b2602c69:ProjectViewProjectNode" />
@@ -838,12 +805,12 @@
       <workItem from="1520545951083" duration="598000" />
       <workItem from="1520707965988" duration="12863000" />
       <workItem from="1520735168307" duration="2302000" />
-      <workItem from="1520802790982" duration="1909000" />
+      <workItem from="1520802790982" duration="7422000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="120498000" />
+    <option name="totallyTimeSpent" value="126011000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -855,16 +822,16 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33888888" sideWeight="0.5415778" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33888888" sideWeight="0.54584223" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2602118" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33888888" sideWeight="0.45842218" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33888888" sideWeight="0.45415777" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20842217" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.4914712" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.48720682" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -921,18 +888,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/data/result/3e7cfc08-5eb5-49cc-bbcc-a4e001e67e4b/versions/version_0/image_2.jpg" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/video/VideoRecorder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-628">
-          <caret line="25" column="42" lean-forward="false" selection-start-line="25" selection-start-column="42" selection-end-line="25" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/result/333eaff6-7546-4d04-b2d9-d5a5aae372ec/versions/version_1/image_4.jpg" />
-    <entry file="file://$PROJECT_DIR$/data/result/333eaff6-7546-4d04-b2d9-d5a5aae372ec/versions/version_0/image_4.jpg" />
-    <entry file="file://$PROJECT_DIR$/data/download/mais/mais_1.jpg" />
     <entry file="file://$PROJECT_DIR$/data/download/mais/mais_2.jpg" />
     <entry file="file://$PROJECT_DIR$/data/download/bonito/bonito_2.jpg" />
     <entry file="file://$PROJECT_DIR$/data/download/bonito/bonito_1.jpg" />
@@ -1036,11 +991,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1666">
@@ -1053,16 +1003,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-259">
           <caret line="55" column="11" lean-forward="false" selection-start-line="55" selection-start-column="11" selection-end-line="55" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/gui/Words.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="21" column="81" lean-forward="false" selection-start-line="21" selection-start-column="81" selection-end-line="21" selection-end-column="81" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1091,6 +1031,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="506">
           <caret line="1271" column="19" lean-forward="false" selection-start-line="1271" selection-start-column="19" selection-end-line="1271" selection-end-column="19" />
+          <folding>
+            <element signature="e#42275#42276#0" expanded="false" />
+            <element signature="e#42315#42316#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1098,6 +1042,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
           <caret line="2874" column="24" lean-forward="true" selection-start-line="2874" selection-start-column="24" selection-end-line="2874" selection-end-column="24" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1125,14 +1070,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/videomixer/VideoMixer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1394">
-          <caret line="89" column="30" lean-forward="false" selection-start-line="89" selection-start-column="30" selection-end-line="89" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/download/Downloader.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="408">
@@ -1141,28 +1078,87 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/test.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/word_cloud.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/AudioScapeStates.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="22" lean-forward="false" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/gui/VideoPlayer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1785">
-          <caret line="118" column="0" lean-forward="false" selection-start-line="118" selection-start-column="0" selection-end-line="118" selection-end-column="0" />
+        <state relative-caret-position="238">
+          <caret line="84" column="9" lean-forward="false" selection-start-line="84" selection-start-column="9" selection-end-line="84" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/video/VideoRecorder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="89" column="29" lean-forward="false" selection-start-line="89" selection-start-column="16" selection-end-line="89" selection-end-column="29" />
           <folding>
-            <element signature="e#3726#3727#0" expanded="true" />
+            <element signature="e#2776#2777#0" expanded="true" />
+            <element signature="e#2839#2840#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/result/2de89123-667f-402f-871c-eea68eae068d/versions/version_0/image_1.jpg">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_91/src.zip!/java/io/File.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1443">
+          <caret line="1205" column="18" lean-forward="false" selection-start-line="1205" selection-start-column="18" selection-end-line="1205" selection-end-column="18" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/util/Util.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="56" column="23" lean-forward="false" selection-start-line="56" selection-start-column="23" selection-end-line="56" selection-end-column="23" />
+        <state relative-caret-position="357">
+          <caret line="100" column="18" lean-forward="false" selection-start-line="100" selection-start-column="18" selection-end-line="100" selection-end-column="18" />
+          <folding>
+            <element signature="e#3422#3423#0" expanded="true" />
+            <element signature="e#3474#3475#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/gui/Words.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="28" column="41" lean-forward="false" selection-start-line="28" selection-start-column="41" selection-end-line="28" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/videomixer/VideoMixer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="385">
+          <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/AudioScape.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="41" column="0" lean-forward="true" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
+        <state relative-caret-position="206">
+          <caret line="417" column="45" lean-forward="false" selection-start-line="417" selection-start-column="45" selection-end-line="417" selection-end-column="45" />
           <folding />
         </state>
       </provider>

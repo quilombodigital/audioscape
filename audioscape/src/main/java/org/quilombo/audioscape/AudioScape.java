@@ -19,6 +19,7 @@ import org.quilombo.audioscape.videomixer.VideoMixer;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.UUID;
 import java.util.logging.Level;
@@ -48,7 +49,7 @@ public class AudioScape {
 
     private String currentProcessingVideo = "videos/processing.mp4";
 
-    public void loop() throws Exception {
+    public synchronized void loop() throws Exception {
 
         if (lastState != state) {
             isFirstStateExecution = true;
@@ -85,6 +86,22 @@ public class AudioScape {
                 startRecording();
             }
             showVideoLoop("videos/recording.mp4");
+            if (elapsedInState() > 25000)
+                setState(AudioScapeStates.SHOW_MAXIMUM_TIME);
+        } else if (currentState == AudioScapeStates.SHOW_MINIMUM_TIME) {
+            if (isFirstStateExecution) {
+                stopRecording();
+                cleanUserSession(sessionId.toString());
+            }
+            showVideoLoop("videos/minimumtime.mp4");
+            if (elapsedInState() > 5000) {
+                setState(AudioScapeStates.CHOOSING_RANDOM_VIDEO);
+            }
+        } else if (currentState == AudioScapeStates.SHOW_MAXIMUM_TIME) {
+            showVideoLoop("videos/maxtime.mp4");
+            if (elapsedInState() > 5000) {
+                setState(AudioScapeStates.PROCESSING);
+            }
         } else if (currentState == AudioScapeStates.PROCESSING) {
             if (isFirstStateExecution) {
                 stopRecording();
@@ -165,7 +182,7 @@ public class AudioScape {
             cleanUserSession(sessionDirectory.getName());
             return;
         }
-        File mixVideo = Util.randomFileInDirectory(mixDirectory); //TODO não pode repetir o mesmo...
+        File mixVideo = Util.randomFileInDirectory(mixDirectory);
         player.stop();
         player.prepare(mixVideo.getAbsolutePath());
         player.start();
@@ -259,9 +276,17 @@ public class AudioScape {
                 //DOWNLOAD ALL WORDS IN TRANSCRIPTION
                 Downloader down = new Downloader();
                 String[] words = transcription.trim().split(" ");
-                String wordcloud = "baixando palavras espere baixando palavras espere baixando palavras espere";
+                String wordcloud = "";
                 for (String word : words) {
                     File directory = new File("data/download/" + word);
+
+                    //CHANGES WORD CLOUD
+                    wordcloud = wordcloud + " " + word.toUpperCase();
+                    String wordsCloudFile = "data/result/" + sessionId + "/record/wordcloud.png";
+                    Words.generateCloud(wordcloud, wordsCloudFile);
+                    currentProcessingVideo = wordsCloudFile;
+
+                    //DOWNLOADS IT IF NEEDED
                     if (!directory.exists()) {
                         System.out.println("downloading: " + word);
                         ArrayList<Googler> queries = new ArrayList<>();
@@ -271,10 +296,6 @@ public class AudioScape {
                         down.SAVE_PATH = "data/download/";
                         down.download(new DownloaderConfig(), queries);
                     }
-                    wordcloud = wordcloud + " " + word;
-                    String wordsCloudFile = "data/result/" + sessionId + "/record/wordcloud.png";
-                    Words.generateCloud(wordcloud, wordsCloudFile);
-                    currentProcessingVideo = wordsCloudFile;
                 }
 
 
@@ -289,16 +310,22 @@ public class AudioScape {
                 //CHOOSE WORD IMAGES TO GENERATE VIDEO, and generate 3 versions
                 String versionsDirectory = "data/result/" + sessionId + "/versions";
                 for (int t = 0; t < 3; t++) {
-                    File target = new File(versionsDirectory + "/version_" + t);
+                    File target = new File(versionsDirectory + "/version_" + Util.pad(t));
                     target.mkdirs();
                     int count = 0;
                     for (String word : words) {
                         count++;
                         File directory = new File("data/download/" + word);
                         File[] files = directory.listFiles();
+                        Arrays.sort(files);
                         File versionFile = files[Math.min(t, files.length - 1)];
                         String extension = Files.getFileExtension(versionFile.getName());
-                        Files.copy(versionFile, new File(target, "image_" + count + "." + extension.toLowerCase()));
+                        try {
+                            Files.copy(versionFile, new File(target, "image_" + Util.pad(count) + "." + extension.toLowerCase()));
+                        } catch (Exception e) {
+                            //ERROR... but will continue...
+                            e.printStackTrace();
+                        }
                     }
                 }
 
@@ -308,11 +335,11 @@ public class AudioScape {
 
                 VideoMixer mixer = new VideoMixer();
                 for (int t = 0; t < 3; t++) {
-                    String mixFilename = "data/result/" + sessionId + "/mix/mix_" + t + ".mp4";
-                    String slideFilename = "data/result/" + sessionId + "/slide/slide_" + t + ".mp4";
+                    String mixFilename = "data/result/" + sessionId + "/mix/mix_" + Util.pad(t) + ".mp4";
+                    String slideFilename = "data/result/" + sessionId + "/slide/slide_" + Util.pad(t) + ".mp4";
                     Util.createDirForFile(mixFilename);
                     Util.createDirForFile(slideFilename);
-                    mixer.mix(transcription, versionsDirectory + "/version_" + t, userAudioFilename, slideFilename, mixFilename);
+                    mixer.mix(transcription, versionsDirectory + "/version_" + Util.pad(t), userAudioFilename, slideFilename, mixFilename);
                 }
 
                 //REPEAT LAT SESSION SOME TIMES
@@ -387,9 +414,13 @@ public class AudioScape {
                 if (e.getKeyCode() == NativeKeyEvent.VC_K) {
                     setState(AudioScapeStates.SHOWING_INSTRUCTIONS);
                 }
-            } else if (isInState(AudioScapeStates.RECORDING)) {
+            } else if (isInState(AudioScapeStates.RECORDING) || isInState(AudioScapeStates.SHOW_MAXIMUM_TIME)) {
                 if (e.getKeyCode() == NativeKeyEvent.VC_K) {
-                    setState(AudioScapeStates.PROCESSING);
+                    if (videoRecorder.recordElapsed() < 5000) {
+                        setState(AudioScapeStates.SHOW_MINIMUM_TIME);
+                    } else {
+                        setState(AudioScapeStates.PROCESSING);
+                    }
                 }
             } else if (isInState(AudioScapeStates.APPROVE)) {
                 if (e.getKeyCode() == NativeKeyEvent.VC_M) {

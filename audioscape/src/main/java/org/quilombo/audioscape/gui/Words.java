@@ -25,12 +25,12 @@ public class Words {
         wordCloud.setPadding(2);
         wordCloud.setBackground(new CircleBackground(300));
         wordCloud.setColorPalette(new ColorPalette(new Color(0x4055F1), new Color(0x408DF1), new Color(0x40AAF1), new Color(0x40C5F1), new Color(0x40D3F1), new Color(0xFFFFFF)));
-        wordCloud.setFontScalar(new SqrtFontScalar(10, 40));
+        wordCloud.setFontScalar(new SqrtFontScalar(30, 60));
         wordCloud.build(wordFrequencies);
         wordCloud.writeToFile(outputFile);
     }
 
     public static void main(String[] args) throws Exception {
-        Words.generateCloud("data/result/312297a2-1dc5-4c6b-8c38-42ec0610114c/record/transcription.txt", "word_cloud.png");
+        Words.generateCloud("eu estou muito feliz", "word_cloud.png");
     }
 }

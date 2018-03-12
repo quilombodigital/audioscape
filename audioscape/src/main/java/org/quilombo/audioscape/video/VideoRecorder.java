@@ -12,6 +12,7 @@ public class VideoRecorder {
     private FFmpegFrameRecorder recorder;
     VideoRecorderGrabber grabberThread;
     VideoRecorderAudio audioThread;
+    private long recordStart;
 
 
     public VideoRecorder(VideoConfig config, AudioConfig audioConfig, String filename) {
@@ -55,7 +56,7 @@ public class VideoRecorder {
 
         audioThread.start();
         grabberThread.start();
-
+        recordStart = System.currentTimeMillis();
         System.out.println("started recording");
     }
 
@@ -84,6 +85,10 @@ public class VideoRecorder {
 
     public FFmpegFrameRecorder getRecorder() {
         return recorder;
+    }
+
+    public long recordElapsed(){
+        return System.currentTimeMillis() - recordStart;
     }
 
     public static void main(String[] args) throws Exception {

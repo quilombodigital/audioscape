@@ -98,4 +98,8 @@ public class Util {
         return pool;
     }
 
+    public static String pad(int number){
+        return String.format("%04d", number);
+    }
+
 }

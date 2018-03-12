@@ -93,7 +93,6 @@ public class VideoPlayer {
 
         //mediaPlayer.pause();
         mediaPlayer.stop();
-
 //        mediaPlayer.stop();
 
     }

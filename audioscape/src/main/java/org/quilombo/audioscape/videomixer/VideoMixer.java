@@ -8,6 +8,7 @@ import org.quilombo.audioscape.util.Util;
 
 import java.io.File;
 import java.nio.file.Files;
+import java.util.Arrays;
 
 public class VideoMixer {
 
@@ -32,6 +33,7 @@ public class VideoMixer {
         //create input file
         File directory = new File(imageDirectory);
         File[] files = directory.listFiles();
+        Arrays.sort(files);
         String input = "";
         File last = null;
         count = 0;
