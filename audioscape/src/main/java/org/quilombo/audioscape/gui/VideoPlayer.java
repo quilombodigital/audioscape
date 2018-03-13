@@ -115,7 +115,11 @@ public class VideoPlayer {
     }
 
     public boolean isPlaying() {
-        return mediaPlayer.isPlaying();
+        try {
+            return mediaPlayer.isPlaying();
+        }catch(Exception e){
+            return false;
+        }
     }
 
 }

@@ -11,6 +11,7 @@ public enum AudioScapeStates {
     PROCESSING,
     SHOWING_RESULT,
     APPROVE,
+    APPROVE_SECOND_CLICK,
     APPROVE_YES,
     APPROVE_NO,
     SHOW_MINIMUM_TIME,

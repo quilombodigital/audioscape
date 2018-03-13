@@ -18,10 +18,7 @@ import org.quilombo.audioscape.video.VideoRecorder;
 import org.quilombo.audioscape.videomixer.VideoMixer;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -132,6 +129,10 @@ public class AudioScape {
             }
         } else if (currentState == AudioScapeStates.APPROVE) {
             showVideoLoop("videos/approve.mp4");
+        } else if (currentState == AudioScapeStates.APPROVE_SECOND_CLICK) {
+            if (elapsedInState() > 2000)
+                setState(AudioScapeStates.APPROVE_YES);
+            showVideoLoop("videos/approve.mp4");
         } else if (currentState == AudioScapeStates.APPROVE_YES) {
             showVideoLoop("videos/approve_yes.mp4");
             if (elapsedInState() > 5000)
@@ -183,9 +184,11 @@ public class AudioScape {
             return;
         }
         File mixVideo = Util.randomFileInDirectory(mixDirectory);
-        player.stop();
-        player.prepare(mixVideo.getAbsolutePath());
-        player.start();
+        if (mixVideo != null && mixVideo.exists()) {
+            player.stop();
+            player.prepare(mixVideo.getAbsolutePath());
+            player.start();
+        }
     }
 
     boolean isFirstStateExecution = true;
@@ -277,6 +280,7 @@ public class AudioScape {
                 Downloader down = new Downloader();
                 String[] words = transcription.trim().split(" ");
                 String wordcloud = "";
+                List<String> wordsToSanitize = new ArrayList<>();
                 for (String word : words) {
                     File directory = new File("data/download/" + word);
 
@@ -295,15 +299,19 @@ public class AudioScape {
                         queries.add(query);
                         down.SAVE_PATH = "data/download/";
                         down.download(new DownloaderConfig(), queries);
+                        wordsToSanitize.add(word);
                     }
                 }
 
 
                 //SANITIZE ALL DOWNLOADED WORDS
-                for (String word : words) {
-                    File directory = new File("data/download/" + word);
-                    for (File tmp : directory.listFiles()) {
-                        ImageConverter.sanitizeJpgImage(tmp);
+                for (String word : wordsToSanitize) {
+                    File sanidir = new File("data/download/" + word);
+                    System.out.println("Directory to sanitize: " + sanidir.getAbsolutePath());
+                    int counter = 0;
+                    for (File tmp : sanidir.listFiles()) {
+                        ImageConverter.sanitizeJpgImage(tmp, counter);
+                        counter++;
                     }
                 }
 
@@ -319,13 +327,21 @@ public class AudioScape {
                         File[] files = directory.listFiles();
                         Arrays.sort(files);
                         File versionFile = files[Math.min(t, files.length - 1)];
-                        String extension = Files.getFileExtension(versionFile.getName());
+                        //String extension = Files.getFileExtension(versionFile.getName());
+                        //if (extension == null)
+                        //    extension = "";
+                        //extension = extension.toLowerCase();
+                        //String[] allowed = {"jpg", "jpeg", "bmp", "png", "gif"};
+                        //String finalExtension = extension;
+                        //boolean isAllowed = Arrays.stream(allowed).anyMatch(x -> x.equals(finalExtension));
+                        //if (isAllowed) {
                         try {
-                            Files.copy(versionFile, new File(target, "image_" + Util.pad(count) + "." + extension.toLowerCase()));
+                            Files.copy(versionFile, new File(target, "image_" + Util.pad(count) + ".jpg"));
                         } catch (Exception e) {
                             //ERROR... but will continue...
                             e.printStackTrace();
                         }
+                        //}
                     }
                 }
 
@@ -423,9 +439,11 @@ public class AudioScape {
                     }
                 }
             } else if (isInState(AudioScapeStates.APPROVE)) {
-                if (e.getKeyCode() == NativeKeyEvent.VC_M) {
-                    setState(AudioScapeStates.APPROVE_YES);
-                } else if (e.getKeyCode() == NativeKeyEvent.VC_N) {
+                if (e.getKeyCode() == NativeKeyEvent.VC_K) {
+                    setState(AudioScapeStates.APPROVE_SECOND_CLICK);
+                }
+            } else if (isInState(AudioScapeStates.APPROVE_SECOND_CLICK)) {
+                if (e.getKeyCode() == NativeKeyEvent.VC_K) {
                     setState(AudioScapeStates.APPROVE_NO);
                 }
             }
