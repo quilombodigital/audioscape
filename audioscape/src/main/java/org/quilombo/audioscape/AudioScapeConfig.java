@@ -14,6 +14,9 @@ public class AudioScapeConfig {
     public VideoConfig recorderVideo = new VideoConfig();
     public AudioConfig recorderAudio = new AudioConfig();
 
+    public int recordInterval;
+    public int minRecordTime;
+    public int maxRecordTime;
 
     public static AudioScapeConfig load() throws Exception {
         ObjectMapper mapper = new ObjectMapper();

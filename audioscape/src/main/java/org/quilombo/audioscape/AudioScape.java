@@ -88,7 +88,7 @@ public class AudioScape {
                 startRecording();
             }
             showVideoLoop("videos/recording.mp4");
-            if (elapsedInState() > 25000)
+            if (elapsedInState() > config.maxRecordTime)
                 setState(AudioScapeStates.SHOW_MAXIMUM_TIME);
         } else if (currentState == AudioScapeStates.SHOW_MINIMUM_TIME) {
             if (isFirstStateExecution) {
@@ -142,14 +142,17 @@ public class AudioScape {
             showVideoLoop("videos/approve_yes.mp4");
             if (elapsedInState() > 5000) {
                 setState(AudioScapeStates.CHOOSING_RANDOM_VIDEO);
+                disableAnotherRecordingUntil = System.currentTimeMillis() + config.recordInterval;
             }
         } else if (currentState == AudioScapeStates.APPROVE_NO) {
             if (isFirstStateExecution) {
                 cleanUserSession(sessionId.toString());
             }
             showVideoLoop("videos/approve_no.mp4");
-            if (elapsedInState() > 5000)
+            if (elapsedInState() > 5000) {
                 setState(AudioScapeStates.CHOOSING_RANDOM_VIDEO);
+                disableAnotherRecordingUntil = System.currentTimeMillis() + config.recordInterval;
+            }
         } else if (currentState == AudioScapeStates.CLEANUP_ON_ERROR) {
             if (isFirstStateExecution) {
                 cleanUserSession(sessionId.toString());
@@ -241,6 +244,8 @@ public class AudioScape {
 
     long recordingStartTime;
     long recordingEndTime;
+
+    long disableAnotherRecordingUntil;
 
     public void stopRecording() throws Exception {
         //videoRecorder.stop();
@@ -390,7 +395,6 @@ public class AudioScape {
                 lastSessionId = sessionId;
                 lastSessionRepeatCounter = 0;
                 lastSessionAlternateFlag = true;
-
             } catch (Exception e) {
                 e.printStackTrace();
                 errors = true;
@@ -449,7 +453,7 @@ public class AudioScape {
                     player.enableFullScreen();
             }
             if (isInState(AudioScapeStates.SHOWING_VIDEO) || isInState(AudioScapeStates.CHOOSING_RANDOM_VIDEO)) {
-                if (e.getKeyCode() == NativeKeyEvent.VC_P) {
+                if ((System.currentTimeMillis() > disableAnotherRecordingUntil) && e.getKeyCode() == NativeKeyEvent.VC_P) {
                     setState(AudioScapeStates.SHOWING_INSTRUCTIONS);
                 }
             } else if (isInState(AudioScapeStates.SHOWING_INSTRUCTIONS)) {
@@ -465,7 +469,7 @@ public class AudioScape {
             } else if (isInState(AudioScapeStates.RECORDING) || isInState(AudioScapeStates.SHOW_MAXIMUM_TIME)) {
                 if (e.getKeyCode() == NativeKeyEvent.VC_K) {
                     long recordElapsed = System.currentTimeMillis() - recordingStartTime;
-                    if (recordElapsed < 5000) {
+                    if (recordElapsed < config.minRecordTime) {
                         setState(AudioScapeStates.SHOW_MINIMUM_TIME);
                     } else {
                         setState(AudioScapeStates.PROCESSING);
@@ -482,7 +486,6 @@ public class AudioScape {
             }
 
         }
-
 
     }
 

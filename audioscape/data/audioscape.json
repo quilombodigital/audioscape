@@ -14,5 +14,8 @@
     "samplerate":22050,
     "sampleSizeInBits":16,
     "audioChannels":1
-  }
+  },
+  "recordInterval":5000,
+  "minRecordTime":5000,
+  "maxRecordTime":25000
 }
