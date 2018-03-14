@@ -3,6 +3,7 @@ package org.quilombo.audioscape.util;
 import com.google.common.io.Files;
 
 import java.io.*;
+import java.security.SecureRandom;
 import java.util.Random;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
@@ -52,7 +53,7 @@ public class Util {
         return Double.parseDouble(result);
     }
 
-    static Random random = new Random();
+    static SecureRandom random = new SecureRandom();
 
     public static File randomFileInDirectory(File file) {
         File[] files = file.listFiles();
@@ -67,6 +68,7 @@ public class Util {
                 new StreamGobbler(process.getInputStream(), System.out::println);
         Executors.newSingleThreadExecutor().submit(streamGobbler);
         int exitCode = process.waitFor();
+        process.destroyForcibly();
         return exitCode;
     }
 

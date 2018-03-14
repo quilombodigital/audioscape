@@ -6,6 +6,7 @@ import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
+import org.quilombo.audioscape.audio.AudioRecorder;
 import org.quilombo.audioscape.download.Downloader;
 import org.quilombo.audioscape.download.DownloaderConfig;
 import org.quilombo.audioscape.gui.VideoPlayer;
@@ -13,12 +14,13 @@ import org.quilombo.audioscape.gui.Words;
 import org.quilombo.audioscape.speech.SpeechToText;
 import org.quilombo.audioscape.util.ImageConverter;
 import org.quilombo.audioscape.util.Util;
-import org.quilombo.audioscape.video.VideoAudioUtils;
-import org.quilombo.audioscape.video.VideoRecorder;
 import org.quilombo.audioscape.videomixer.VideoMixer;
 
 import java.io.File;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -33,9 +35,12 @@ public class AudioScape {
     private AudioScapeConfig config;
     private VideoPlayer player;
     private String lastProcessionVideo = null;
+    SpeechToText stt;
 
     public AudioScape() throws Exception {
         config = AudioScapeConfig.load();
+        stt = new SpeechToText();
+        audioRecorder = new AudioRecorder(config.recorderAudio);
     }
 
     AudioScapeStates lastState = AudioScapeStates.INITIALIZING;
@@ -135,8 +140,9 @@ public class AudioScape {
             showVideoLoop("videos/approve.mp4");
         } else if (currentState == AudioScapeStates.APPROVE_YES) {
             showVideoLoop("videos/approve_yes.mp4");
-            if (elapsedInState() > 5000)
+            if (elapsedInState() > 5000) {
                 setState(AudioScapeStates.CHOOSING_RANDOM_VIDEO);
+            }
         } else if (currentState == AudioScapeStates.APPROVE_NO) {
             if (isFirstStateExecution) {
                 cleanUserSession(sessionId.toString());
@@ -206,8 +212,10 @@ public class AudioScape {
 
     UUID sessionId;
     String recordResultDirectory;
-    VideoRecorder videoRecorder;
-    String userVideoFilename;
+    //VideoRecorder videoRecorder;
+    AudioRecorder audioRecorder;
+    //String userVideoFilename;
+    String userAudioFilename;
     ProcessingThread processingThread;
 
     public void createUserSession() {
@@ -221,14 +229,23 @@ public class AudioScape {
     }
 
     public void startRecording() throws Exception {
-        userVideoFilename = recordResultDirectory + "/record.flv";
-        Util.createDirForFile(userVideoFilename);
-        videoRecorder = new VideoRecorder(config.recorderVideo, config.recorderAudio, userVideoFilename);
-        videoRecorder.start();
+        //userVideoFilename = recordResultDirectory + "/record.flv";
+        //Util.createDirForFile(userVideoFilename);
+        //videoRecorder = new VideoRecorder(config.recorderVideo, config.recorderAudio, userVideoFilename);
+        //videoRecorder.start();
+        userAudioFilename = recordResultDirectory + "/record.wav";
+        Util.createDirForFile(userAudioFilename);
+        audioRecorder.start(new File(userAudioFilename));
+        recordingStartTime = System.currentTimeMillis();
     }
 
+    long recordingStartTime;
+    long recordingEndTime;
+
     public void stopRecording() throws Exception {
-        videoRecorder.stop();
+        //videoRecorder.stop();
+        audioRecorder.stop();
+        recordingEndTime = System.currentTimeMillis();
     }
 
     public void startProcessing() throws Exception {
@@ -250,20 +267,21 @@ public class AudioScape {
             try {
                 //PROCESSING STARTS HERE
 
-                currentProcessingVideo = "videos/extracting.mp4";
+                //currentProcessingVideo = "videos/extracting.mp4";
 
                 //EXTRACT AUDIO FROM VIDEO
-                String userAudioFilename = recordResultDirectory + "/audio.wav";
-                VideoAudioUtils.extractAudioFromVideo(userVideoFilename, userAudioFilename, config.recorderAudio);
+                //String userAudioFilename = recordResultDirectory + "/audio.wav";
+                //VideoAudioUtils.extractAudioFromVideo(userVideoFilename, userAudioFilename, config.recorderAudio);
 
                 currentProcessingVideo = "videos/text_to_audio.mp4";
 
                 //CONVERT AUDIO TO TEXT
-                SpeechToText stt = new SpeechToText();
+
                 String transcription = stt.convert(config.recorderAudio, userAudioFilename);
 
                 String userTranscriptFilename = recordResultDirectory + "/transcription.txt";
                 Util.writeToFile(transcription, userTranscriptFilename);
+                System.out.println("TRANSCRIPTION: " + transcription);
 
                 //EXTRACT EMOTION DATA
 
@@ -278,20 +296,29 @@ public class AudioScape {
 
                 //DOWNLOAD ALL WORDS IN TRANSCRIPTION
                 Downloader down = new Downloader();
-                String[] words = transcription.trim().split(" ");
+                String[] words = transcription.trim().split("\\s+");
+
+                for (String word : words) {
+                    System.out.println("WORD:" + word);
+                }
+
                 String wordcloud = "";
                 List<String> wordsToSanitize = new ArrayList<>();
                 for (String word : words) {
+                    word = word.trim();
                     File directory = new File("data/download/" + word);
 
                     //CHANGES WORD CLOUD
                     wordcloud = wordcloud + " " + word.toUpperCase();
-                    String wordsCloudFile = "data/result/" + sessionId + "/record/wordcloud.png";
+                    File wordcloudDir = new File("data/result/" + sessionId + "/wordcloud/");
+                    wordcloudDir.mkdirs();
+                    String wordsCloudFile = new File(wordcloudDir, UUID.randomUUID().toString() + ".png").getAbsolutePath();
                     Words.generateCloud(wordcloud, wordsCloudFile);
                     currentProcessingVideo = wordsCloudFile;
 
+
                     //DOWNLOADS IT IF NEEDED
-                    if (!directory.exists()) {
+                    if (!directory.exists() || directory.listFiles().length < 3) {
                         System.out.println("downloading: " + word);
                         ArrayList<Googler> queries = new ArrayList<>();
                         Googler query = new Googler();
@@ -303,9 +330,11 @@ public class AudioScape {
                     }
                 }
 
+                currentProcessingVideo = "videos/processing.mp4";
 
                 //SANITIZE ALL DOWNLOADED WORDS
                 for (String word : wordsToSanitize) {
+                    word = word.trim();
                     File sanidir = new File("data/download/" + word);
                     System.out.println("Directory to sanitize: " + sanidir.getAbsolutePath());
                     int counter = 0;
@@ -322,26 +351,24 @@ public class AudioScape {
                     target.mkdirs();
                     int count = 0;
                     for (String word : words) {
+                        System.out.println("Choosing image for word: " + word);
+                        word = word.trim();
                         count++;
                         File directory = new File("data/download/" + word);
-                        File[] files = directory.listFiles();
-                        Arrays.sort(files);
-                        File versionFile = files[Math.min(t, files.length - 1)];
-                        //String extension = Files.getFileExtension(versionFile.getName());
-                        //if (extension == null)
-                        //    extension = "";
-                        //extension = extension.toLowerCase();
-                        //String[] allowed = {"jpg", "jpeg", "bmp", "png", "gif"};
-                        //String finalExtension = extension;
-                        //boolean isAllowed = Arrays.stream(allowed).anyMatch(x -> x.equals(finalExtension));
-                        //if (isAllowed) {
+                        File versionFile = Util.randomFileInDirectory(directory);
+                        if (versionFile == null) {
+                            System.out.println("COULD NOT FIND ANYTHING INSIDE!! " + directory.getAbsolutePath());
+                            continue;
+                        }
+                        File finalTarget = new File(target, "image_" + Util.pad(count) + ".jpg");
+                        System.out.println("copying " + versionFile.getAbsolutePath() + " to " + finalTarget.getAbsolutePath());
                         try {
-                            Files.copy(versionFile, new File(target, "image_" + Util.pad(count) + ".jpg"));
+                            Files.copy(versionFile, finalTarget);
                         } catch (Exception e) {
                             //ERROR... but will continue...
                             e.printStackTrace();
                         }
-                        //}
+
                     }
                 }
 
@@ -355,10 +382,11 @@ public class AudioScape {
                     String slideFilename = "data/result/" + sessionId + "/slide/slide_" + Util.pad(t) + ".mp4";
                     Util.createDirForFile(mixFilename);
                     Util.createDirForFile(slideFilename);
-                    mixer.mix(transcription, versionsDirectory + "/version_" + Util.pad(t), userAudioFilename, slideFilename, mixFilename);
+                    double calculatedTime = (recordingEndTime - recordingStartTime) / 1000.0;
+                    mixer.mix(transcription, versionsDirectory + "/version_" + Util.pad(t), userAudioFilename, slideFilename, mixFilename, calculatedTime);
                 }
 
-                //REPEAT LAT SESSION SOME TIMES
+                //REPEAT LAST SESSION SOME TIMES
                 lastSessionId = sessionId;
                 lastSessionRepeatCounter = 0;
                 lastSessionAlternateFlag = true;
@@ -366,6 +394,7 @@ public class AudioScape {
             } catch (Exception e) {
                 e.printStackTrace();
                 errors = true;
+                System.out.println("FINISHED PROCESSING WITH ERRORS");
             }
             System.out.println("THE END");
             running = false;
@@ -410,13 +439,16 @@ public class AudioScape {
 
         @Override
         public void nativeKeyReleased(NativeKeyEvent e) {
+            if (e.getKeyCode() == NativeKeyEvent.VC_Q) {
+                System.exit(0);
+            }
             if (e.getKeyCode() == NativeKeyEvent.VC_F) {
                 if (player.isFullscreen())
                     player.disableFullScreen();
                 else
                     player.enableFullScreen();
             }
-            if (isInState(AudioScapeStates.CHOOSING_RANDOM_VIDEO) || isInState(AudioScapeStates.SHOWING_VIDEO)) {
+            if (isInState(AudioScapeStates.SHOWING_VIDEO) || isInState(AudioScapeStates.CHOOSING_RANDOM_VIDEO)) {
                 if (e.getKeyCode() == NativeKeyEvent.VC_P) {
                     setState(AudioScapeStates.SHOWING_INSTRUCTIONS);
                 }
@@ -432,7 +464,8 @@ public class AudioScape {
                 }
             } else if (isInState(AudioScapeStates.RECORDING) || isInState(AudioScapeStates.SHOW_MAXIMUM_TIME)) {
                 if (e.getKeyCode() == NativeKeyEvent.VC_K) {
-                    if (videoRecorder.recordElapsed() < 5000) {
+                    long recordElapsed = System.currentTimeMillis() - recordingStartTime;
+                    if (recordElapsed < 5000) {
                         setState(AudioScapeStates.SHOW_MINIMUM_TIME);
                     } else {
                         setState(AudioScapeStates.PROCESSING);

@@ -4,14 +4,15 @@ Generative Art project for an exhibition at [OSítio](https://ositio.com.br/#).
 **This is a work in progress, it is not complete yet, but it will be in a few weeks. The core code is complete and functional. It is missing user interface.**
 
 ## Description ##
-This project records the user telling a story, makes the transcription using Google speech API, extract text emotion using Microsoft Azure text analysis, grabs images connected to these words using google search, and creates a resulting video using javacv and ffmpeg, that mixes all this information.
+This project records the user telling a story, makes the transcription using Google speech API, <s>extract text emotion using Microsoft Azure text analysis</s>, grabs images connected to these words using google search, and creates a resulting video using javacv and ffmpeg, that mixes all this information.
 
 ## Requirements ##
 
 This instructions will change soon, because currently I am executing it using the Intellij IDE, and I dont have yet an install package, but these are the minimum requirements:
 
-1. HD webcam.
+1. <s>HD webcam.</s>
 2. Good microphone (Shure)
+3. USB interface for microfone (Behringer) 
 2. Make sure you have at least Java JDK 8.
 2. OpenCV 3.4.0. (at environment path).
 3. [Visual C++ Redistributable for Visual Studio 2015](https://www.microsoft.com/en-us/download/details.aspx?id=48145).
@@ -29,10 +30,10 @@ This instructions will change soon, because currently I am executing it using th
 ## TODO ##
 
 * Create minimum install package and .bat file
-* Use videos with text as interface
-* Delete sessions when there is an error
-* Make interface to hardware button
-* Make interface to user detection (arduino+distance)
+* <s>Use videos with text as interface</s>
+* <s>Delete sessions when there is an error</s>
+* <s>Make interface to hardware button</s>
+* <s>Make interface to user detection (arduino+distance)</s>
 * Better video mix, maybe overlay with user record beside slides
 * Study to use two monitors
 

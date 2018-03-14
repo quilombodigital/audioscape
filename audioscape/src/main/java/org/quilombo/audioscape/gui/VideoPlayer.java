@@ -32,19 +32,21 @@ public class VideoPlayer {
         contentPane.setLayout(new BorderLayout());
         contentPane.add(canvas, BorderLayout.CENTER);
 
-        frame = new JFrame("VIDEO");
+        frame = new JFrame();
+        frame.setUndecorated(true);
         frame.setContentPane(contentPane);
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
-                mediaPlayer.release();
-                mediaPlayer = null;
+                //mediaPlayer.release();
+                //mediaPlayer = null;
                 System.exit(0); //calling the method is a must
             }
         });
-        frame.setLocation(50, 50);
-        frame.setSize(800, 600);
+        //frame.setLocation(50, 50);
+        //frame.setSize(800, 600);
+        frame.setMinimumSize(new Dimension(640, 480));
 
         enableFullScreen();
 
@@ -117,7 +119,7 @@ public class VideoPlayer {
     public boolean isPlaying() {
         try {
             return mediaPlayer.isPlaying();
-        }catch(Exception e){
+        } catch (Exception e) {
             return false;
         }
     }

@@ -1,10 +1,4 @@
 file images/as16.png
-duration 3.0
-file images/as17.png
-duration 1.0
-file images/as18.png
-duration 1.0
-file images/as19.png
-duration 5.0
-file images/as19.png
+duration 10.0
+file images/as16.png
 duration 1.0

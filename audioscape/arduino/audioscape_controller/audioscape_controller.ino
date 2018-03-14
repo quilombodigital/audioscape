@@ -28,15 +28,15 @@ void loop() {
       Keyboard.print("K");
     }
   }
-  delay(50);
-  int distance = sonar.convert_cm(sonar.ping_median(10));
+//  delay(50);
+  int distance = sonar.convert_cm(sonar.ping_median(5));
   if (distance<trigger_distance && !inside){
     inside=true;
     Keyboard.print("P");
     digitalWrite(ledPin, HIGH);
   }else if(distance>=trigger_distance && inside){
     inside=false;
-    Keyboard.print("O"); 
+    Keyboard.print("O");
     digitalWrite(ledPin, LOW);
   }
 

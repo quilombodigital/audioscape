@@ -13,6 +13,7 @@ public class VideoRecorder {
     VideoRecorderGrabber grabberThread;
     VideoRecorderAudio audioThread;
     private long recordStart;
+    private long recordStop;
 
 
     public VideoRecorder(VideoConfig config, AudioConfig audioConfig, String filename) {
@@ -66,6 +67,7 @@ public class VideoRecorder {
         grabberThread.shutdown();
         audioThread.shutdown();
         recorder.stop();
+        recordStop = System.currentTimeMillis();
         System.out.println("stopped recording");
     }
 
@@ -87,8 +89,12 @@ public class VideoRecorder {
         return recorder;
     }
 
-    public long recordElapsed(){
+    public long recordElapsed() {
         return System.currentTimeMillis() - recordStart;
+    }
+
+    public long recordDuration() {
+        return recordStop - recordStart;
     }
 
     public static void main(String[] args) throws Exception {

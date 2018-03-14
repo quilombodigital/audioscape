@@ -14,6 +14,7 @@ public class VideoRecorderAudio extends Thread {
     private VideoRecorder videoRecorder;
     ScheduledThreadPoolExecutor exec = Util.createScheduledExecutor(1);
     boolean isRunning = false;
+    TargetDataLine line = null;
 
     public VideoRecorderAudio(VideoRecorder videoRecorder) {
         this.videoRecorder = videoRecorder;
@@ -34,8 +35,8 @@ public class VideoRecorderAudio extends Thread {
         DataLine.Info dataLineInfo = new DataLine.Info(TargetDataLine.class, audioFormat);
 
         try {
-            // TargetDataLine line = (TargetDataLine)mixer.getLine(dataLineInfo);
-            final TargetDataLine line = (TargetDataLine) AudioSystem.getLine(dataLineInfo);
+            line = (TargetDataLine)mixer.getLine(dataLineInfo);
+            //line = (TargetDataLine) AudioSystem.getLine(dataLineInfo);
             line.open(audioFormat);
             line.start();
 
@@ -45,13 +46,14 @@ public class VideoRecorderAudio extends Thread {
             int audioBufferSize = sampleRate * numChannels;
             final byte[] audioBytes = new byte[audioBufferSize];
 
+            TargetDataLine finalLine = line;
             exec.scheduleAtFixedRate(new Runnable() {
 
                 public void run() {
                     try {
                         int nBytesRead = 0;
                         while (nBytesRead == 0) {
-                            nBytesRead = line.read(audioBytes, 0, line.available());
+                            nBytesRead = finalLine.read(audioBytes, 0, finalLine.available());
                         }
 
                         int nSamplesRead = nBytesRead / 2;
@@ -68,6 +70,7 @@ public class VideoRecorderAudio extends Thread {
                 }
             }, 0, (long) 1000 / videoRecorder.getVideoConfig().frameRate, TimeUnit.MILLISECONDS);
         } catch (LineUnavailableException e1) {
+            System.out.println("COULD NOT GRAB AUDIO LINE!!!!!!!!!!!!!");
             e1.printStackTrace();
         }
     }

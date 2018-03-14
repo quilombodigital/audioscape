@@ -15,10 +15,11 @@ public class VideoMixer {
     public VideoMixer() {
     }
 
-    public void mix(String transcription, String imageDirectory, String audioFilename, String slideFilename, String outputFilename) throws Exception {
+    public void mix(String transcription, String imageDirectory, String audioFilename, String slideFilename, String outputFilename, double calculatedTime) throws Exception {
 
         //DISCOVER FILE LENGTH
-        double audioDuration = Util.audioDuration(audioFilename);
+        //double audioDuration = Util.audioDuration(audioFilename);
+        double audioDuration = calculatedTime;
         String[] words = transcription.trim().split(" ");
         int allWordsLength = 0;
         for (String word : words)
