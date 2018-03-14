@@ -2,28 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e5458e31-9db2-4288-bfa9-05f4bddcb31f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/audio/AudioRecorder.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/demos/FfmpegDemo.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/demos/PlayVideoExample.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/demos/QuickstartSample.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/demos/Tutorial01.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/demos/WebcamAndMicrophoneCapture.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/demos/WebcamTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/demos/WebcamVideoTest.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tools/images_to_videos/images/as1.png" afterPath="$PROJECT_DIR$/tools/images_to_videos/images/as1.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tools/images_to_videos/images/as10.png" afterPath="$PROJECT_DIR$/tools/images_to_videos/images/as10.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tools/vlc-2.2.8/plugins/plugins.dat" afterPath="$PROJECT_DIR$/tools/vlc-2.2.8/plugins/plugins.dat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/videos/approve_yes.mp4" afterPath="$PROJECT_DIR$/videos/approve_yes.mp4" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/videos/instructions.mp4" afterPath="$PROJECT_DIR$/videos/instructions.mp4" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/arduino/audioscape_controller/audioscape_controller.ino" afterPath="$PROJECT_DIR$/arduino/audioscape_controller/audioscape_controller.ino" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/AudioScape.java" afterPath="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/AudioScape.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/gui/VideoPlayer.java" afterPath="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/gui/VideoPlayer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/speech/SpeechToText.java" afterPath="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/speech/SpeechToText.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/util/Util.java" afterPath="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/util/Util.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/video/VideoRecorder.java" afterPath="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/video/VideoRecorder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/video/VideoRecorderAudio.java" afterPath="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/video/VideoRecorderAudio.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/videomixer/VideoMixer.java" afterPath="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/videomixer/VideoMixer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -35,11 +16,41 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="AudioScape.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="AudioScape.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/AudioScape.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="790">
-              <caret line="395" column="30" lean-forward="true" selection-start-line="395" selection-start-column="30" selection-end-line="395" selection-end-column="30" />
+            <state relative-caret-position="348">
+              <caret line="369" column="25" lean-forward="false" selection-start-line="369" selection-start-column="25" selection-end-line="369" selection-end-column="25" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="152">
+              <caret line="26" column="69" lean-forward="false" selection-start-line="26" selection-start-column="69" selection-end-line="26" selection-end-column="69" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="audioscape.iml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/audioscape.iml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="audioscape.bat" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/audioscape.bat">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="4" column="93" lean-forward="true" selection-start-line="4" selection-start-column="93" selection-end-line="4" selection-end-column="93" />
               <folding />
             </state>
           </provider>
@@ -131,7 +142,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/VideoRecorder.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/VideoRecorderGrabber.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/VideoRecorderAudio.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/demos/QuickstartSample.java" />
@@ -165,7 +175,6 @@
         <option value="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/demos/PlayVideoExample.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/GlobalKeyListener.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/AudioScapeKeyListener.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/gui/WordCloud.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/video/VideoRecorderGrabber.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/download/Downloader.java" />
@@ -182,6 +191,8 @@
         <option value="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/demos/JavaSoundRecorder.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/audio/AudioRecorder.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/AudioScape.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/audioscape.bat" />
       </list>
     </option>
   </component>
@@ -210,6 +221,17 @@
           <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
           <item name="audioscape" type="9519ce18:MavenProjectsStructure$ProjectNode" />
           <item name="Lifecycle" type="58874e2:MavenProjectsStructure$LifecycleNode" />
+        </path>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="audioscape" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+          <item name="Plugins" type="7aea1407:MavenProjectsStructure$PluginsNode" />
+        </path>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="audioscape" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+          <item name="Plugins" type="7aea1407:MavenProjectsStructure$PluginsNode" />
+          <item name="assembly" type="36feed69:MavenProjectsStructure$PluginNode" />
         </path>
       </expand>
       <select />
@@ -252,35 +274,6 @@
             <path>
               <item name="audioscape" type="b2602c69:ProjectViewProjectNode" />
               <item name="audioscape" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="audioscape" type="b2602c69:ProjectViewProjectNode" />
-              <item name="audioscape" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-              <item name="download" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="audioscape" type="b2602c69:ProjectViewProjectNode" />
-              <item name="audioscape" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-              <item name="download" type="462c0819:PsiDirectoryNode" />
-              <item name="se" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="audioscape" type="b2602c69:ProjectViewProjectNode" />
-              <item name="audioscape" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-              <item name="result" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="audioscape" type="b2602c69:ProjectViewProjectNode" />
-              <item name="audioscape" type="462c0819:PsiDirectoryNode" />
-              <item name="keys" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="audioscape" type="b2602c69:ProjectViewProjectNode" />
-              <item name="audioscape" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -302,312 +295,12 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="tadbir" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="audioscape" type="b2602c69:ProjectViewProjectNode" />
-              <item name="audioscape" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="tadbir" type="462c0819:PsiDirectoryNode" />
-              <item name="net" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="audioscape" type="b2602c69:ProjectViewProjectNode" />
-              <item name="audioscape" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="audioscape" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="audioscape" type="b2602c69:ProjectViewProjectNode" />
               <item name="audioscape" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="audioscape" type="462c0819:PsiDirectoryNode" />
-              <item name="analysis" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="audioscape" type="b2602c69:ProjectViewProjectNode" />
-              <item name="audioscape" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="audioscape" type="462c0819:PsiDirectoryNode" />
-              <item name="audio" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="audioscape" type="b2602c69:ProjectViewProjectNode" />
-              <item name="audioscape" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="audioscape" type="462c0819:PsiDirectoryNode" />
-              <item name="download" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="audioscape" type="b2602c69:ProjectViewProjectNode" />
-              <item name="audioscape" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="audioscape" type="462c0819:PsiDirectoryNode" />
-              <item name="gui" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="audioscape" type="b2602c69:ProjectViewProjectNode" />
-              <item name="audioscape" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="audioscape" type="462c0819:PsiDirectoryNode" />
-              <item name="speech" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="audioscape" type="b2602c69:ProjectViewProjectNode" />
-              <item name="audioscape" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="audioscape" type="462c0819:PsiDirectoryNode" />
-              <item name="util" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="audioscape" type="b2602c69:ProjectViewProjectNode" />
-              <item name="audioscape" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="audioscape" type="462c0819:PsiDirectoryNode" />
-              <item name="video" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="audioscape" type="b2602c69:ProjectViewProjectNode" />
-              <item name="audioscape" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="audioscape" type="462c0819:PsiDirectoryNode" />
-              <item name="videomixer" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="audioscape" type="b2602c69:ProjectViewProjectNode" />
-              <item name="audioscape" type="462c0819:PsiDirectoryNode" />
-              <item name="tools" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="audioscape" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-            </path>
-            <path>
-              <item name="audioscape" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; 1.8 &gt;" type="70bed36:NamedLibraryElementNode" />
-            </path>
-            <path>
-              <item name="audioscape" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; 1.8 &gt;" type="70bed36:NamedLibraryElementNode" />
-              <item name="rt.jar" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="audioscape" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; 1.8 &gt;" type="70bed36:NamedLibraryElementNode" />
-              <item name="rt.jar" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="audioscape" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; 1.8 &gt;" type="70bed36:NamedLibraryElementNode" />
-              <item name="rt.jar" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="io" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="audioscape" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; 1.8 &gt;" type="70bed36:NamedLibraryElementNode" />
-              <item name="rt.jar" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="net" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="audioscape" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; 1.8 &gt;" type="70bed36:NamedLibraryElementNode" />
-              <item name="rt.jar" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="util" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="audioscape" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="Maven: com.google.api:gax:1.15.0" type="70bed36:NamedLibraryElementNode" />
-            </path>
-            <path>
-              <item name="audioscape" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="Maven: com.google.api:gax:1.15.0" type="70bed36:NamedLibraryElementNode" />
-              <item name="gax-1.15.0.jar" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="audioscape" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="Maven: com.google.api:gax:1.15.0" type="70bed36:NamedLibraryElementNode" />
-              <item name="gax-1.15.0.jar" type="462c0819:PsiDirectoryNode" />
-              <item name="gax" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="audioscape" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="Maven: com.google.api:gax:1.15.0" type="70bed36:NamedLibraryElementNode" />
-              <item name="gax-1.15.0.jar" type="462c0819:PsiDirectoryNode" />
-              <item name="gax" type="462c0819:PsiDirectoryNode" />
-              <item name="core" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="audioscape" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="Maven: com.google.cloud:google-cloud-speech:0.32.0-alpha" type="70bed36:NamedLibraryElementNode" />
-            </path>
-            <path>
-              <item name="audioscape" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="Maven: com.google.cloud:google-cloud-speech:0.32.0-alpha" type="70bed36:NamedLibraryElementNode" />
-              <item name="google-cloud-speech-0.32.0-alpha.jar" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="audioscape" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="Maven: com.google.cloud:google-cloud-speech:0.32.0-alpha" type="70bed36:NamedLibraryElementNode" />
-              <item name="google-cloud-speech-0.32.0-alpha.jar" type="462c0819:PsiDirectoryNode" />
-              <item name="speech" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="audioscape" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="Maven: com.google.cloud:google-cloud-speech:0.32.0-alpha" type="70bed36:NamedLibraryElementNode" />
-              <item name="google-cloud-speech-0.32.0-alpha.jar" type="462c0819:PsiDirectoryNode" />
-              <item name="speech" type="462c0819:PsiDirectoryNode" />
-              <item name="v1" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="audioscape" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="Maven: com.google.guava:guava:20.0" type="70bed36:NamedLibraryElementNode" />
-            </path>
-            <path>
-              <item name="audioscape" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="Maven: com.google.guava:guava:20.0" type="70bed36:NamedLibraryElementNode" />
-              <item name="guava-20.0.jar" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="audioscape" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="Maven: com.google.guava:guava:20.0" type="70bed36:NamedLibraryElementNode" />
-              <item name="guava-20.0.jar" type="462c0819:PsiDirectoryNode" />
-              <item name="google" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="audioscape" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="Maven: com.google.guava:guava:20.0" type="70bed36:NamedLibraryElementNode" />
-              <item name="guava-20.0.jar" type="462c0819:PsiDirectoryNode" />
-              <item name="google" type="462c0819:PsiDirectoryNode" />
-              <item name="common" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="audioscape" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="Maven: com.google.guava:guava:20.0" type="70bed36:NamedLibraryElementNode" />
-              <item name="guava-20.0.jar" type="462c0819:PsiDirectoryNode" />
-              <item name="google" type="462c0819:PsiDirectoryNode" />
-              <item name="common" type="462c0819:PsiDirectoryNode" />
-              <item name="io" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="audioscape" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="Maven: com.kennycason:kumo-core:1.13" type="70bed36:NamedLibraryElementNode" />
-            </path>
-            <path>
-              <item name="audioscape" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="Maven: com.kennycason:kumo-core:1.13" type="70bed36:NamedLibraryElementNode" />
-              <item name="kumo-core-1.13.jar" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="audioscape" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="Maven: com.kennycason:kumo-core:1.13" type="70bed36:NamedLibraryElementNode" />
-              <item name="kumo-core-1.13.jar" type="462c0819:PsiDirectoryNode" />
-              <item name="kumo" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="audioscape" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="Maven: com.kennycason:kumo-core:1.13" type="70bed36:NamedLibraryElementNode" />
-              <item name="kumo-core-1.13.jar" type="462c0819:PsiDirectoryNode" />
-              <item name="kumo" type="462c0819:PsiDirectoryNode" />
-              <item name="nlp" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="audioscape" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="Maven: net.bramp.ffmpeg:ffmpeg:0.6.2" type="70bed36:NamedLibraryElementNode" />
-            </path>
-            <path>
-              <item name="audioscape" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="Maven: net.bramp.ffmpeg:ffmpeg:0.6.2" type="70bed36:NamedLibraryElementNode" />
-              <item name="ffmpeg-0.6.2.jar" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="audioscape" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="Maven: net.bramp.ffmpeg:ffmpeg:0.6.2" type="70bed36:NamedLibraryElementNode" />
-              <item name="ffmpeg-0.6.2.jar" type="462c0819:PsiDirectoryNode" />
-              <item name="bramp" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="audioscape" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="Maven: net.bramp.ffmpeg:ffmpeg:0.6.2" type="70bed36:NamedLibraryElementNode" />
-              <item name="ffmpeg-0.6.2.jar" type="462c0819:PsiDirectoryNode" />
-              <item name="bramp" type="462c0819:PsiDirectoryNode" />
-              <item name="ffmpeg" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="audioscape" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="Maven: uk.co.caprica:vlcj:3.9.0" type="70bed36:NamedLibraryElementNode" />
-            </path>
-            <path>
-              <item name="audioscape" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="Maven: uk.co.caprica:vlcj:3.9.0" type="70bed36:NamedLibraryElementNode" />
-              <item name="vlcj-3.9.0.jar" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="audioscape" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="Maven: uk.co.caprica:vlcj:3.9.0" type="70bed36:NamedLibraryElementNode" />
-              <item name="vlcj-3.9.0.jar" type="462c0819:PsiDirectoryNode" />
-              <item name="vlcj" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="audioscape" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="Maven: uk.co.caprica:vlcj:3.9.0" type="70bed36:NamedLibraryElementNode" />
-              <item name="vlcj-3.9.0.jar" type="462c0819:PsiDirectoryNode" />
-              <item name="vlcj" type="462c0819:PsiDirectoryNode" />
-              <item name="player" type="462c0819:PsiDirectoryNode" />
+              <item name="target" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -628,8 +321,8 @@
     <property name="SearchEverywhereHistoryKey" value="te&#9;FILE&#9;file://F:/devel/misc/audioscape/audioscape/src/main/java/org/quilombo/audioscape/analysis/TextAnalysisConfig.java" />
   </component>
   <component name="RecentsManager">
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="org.quilombo.audioscape" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\mostradearte\audioscape\data" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="F:\devel\misc\audioscape\audioscape\data\result\301d27d1-68a9-4832-9e5c-8d3a72f0b1bc" />
@@ -643,8 +336,8 @@
       <recent name="org.quilombo.audioscape.download" />
       <recent name="org.quilombo.audioscape.video" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="F:\mostradearte\audioscape\data" />
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="org.quilombo.audioscape" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -892,12 +585,12 @@
       <workItem from="1520735168307" duration="2302000" />
       <workItem from="1520802790982" duration="8358000" />
       <workItem from="1520905474371" duration="8969000" />
-      <workItem from="1520955316589" duration="19379000" />
+      <workItem from="1520955316589" duration="22607000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="155295000" />
+    <option name="totallyTimeSpent" value="158523000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -910,7 +603,7 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3211111" sideWeight="0.56289977" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2602118" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26012793" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3211111" sideWeight="0.4371002" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -969,9 +662,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/data/download/espere/espere-500x500.JPG" />
-    <entry file="file://$PROJECT_DIR$/data/download/espere/espere-logo-1.jpg" />
-    <entry file="file://$PROJECT_DIR$/data/download/espere/espere-uma-acta-2207440.jpg" />
     <entry file="file://$PROJECT_DIR$/data/download/espere/seja-grato-e-nao-espere-recompensa-pela-sua-bondade.jpg" />
     <entry file="file://$PROJECT_DIR$/data/download/espere/nao-espere.jpg" />
     <entry file="file://$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/download/Downloader.java">
@@ -1293,8 +983,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/quilombo/audioscape/AudioScape.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="790">
-          <caret line="395" column="30" lean-forward="true" selection-start-line="395" selection-start-column="30" selection-end-line="395" selection-end-column="30" />
+        <state relative-caret-position="348">
+          <caret line="369" column="25" lean-forward="false" selection-start-line="369" selection-start-column="25" selection-end-line="369" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/audioscape.iml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="26" column="69" lean-forward="false" selection-start-line="26" selection-start-column="69" selection-end-line="26" selection-end-column="69" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/audioscape.bat">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="93" lean-forward="true" selection-start-line="4" selection-start-column="93" selection-end-line="4" selection-end-column="93" />
           <folding />
         </state>
       </provider>
