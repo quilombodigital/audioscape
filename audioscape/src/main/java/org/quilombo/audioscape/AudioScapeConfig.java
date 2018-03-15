@@ -17,6 +17,8 @@ public class AudioScapeConfig {
     public int recordInterval;
     public int minRecordTime;
     public int maxRecordTime;
+    public boolean normalizationEnabled = true;
+    public boolean trimEnabled = false;
 
     public static AudioScapeConfig load() throws Exception {
         ObjectMapper mapper = new ObjectMapper();

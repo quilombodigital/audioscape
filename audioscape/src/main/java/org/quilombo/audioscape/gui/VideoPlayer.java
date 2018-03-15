@@ -11,6 +11,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
 import java.io.File;
 
 public class VideoPlayer {
@@ -46,6 +47,14 @@ public class VideoPlayer {
         });
         //frame.setLocation(50, 50);
         //frame.setSize(800, 600);
+
+        BufferedImage cursorImg = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
+        Cursor blankCursor = Toolkit.getDefaultToolkit().createCustomCursor(
+                cursorImg, new Point(0, 0), "blank cursor");
+        frame.getContentPane().setCursor(blankCursor);
+
+
+
         frame.setMinimumSize(new Dimension(640, 480));
 
         enableFullScreen();
@@ -53,6 +62,11 @@ public class VideoPlayer {
         MediaPlayerFactory factory = new MediaPlayerFactory();
         mediaPlayer = factory.newEmbeddedMediaPlayer();
 
+        try {
+            Robot robot = new Robot();
+            robot.mouseMove((int)Toolkit.getDefaultToolkit().getScreenSize().getWidth(), (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight());
+        }catch (Exception e){
+        }
         CanvasVideoSurface videoSurface = factory.newVideoSurface(canvas);
         mediaPlayer.setVideoSurface(videoSurface);
         mediaPlayer.setFullScreen(true);

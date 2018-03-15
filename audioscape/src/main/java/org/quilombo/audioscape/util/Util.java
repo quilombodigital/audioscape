@@ -4,7 +4,6 @@ import com.google.common.io.Files;
 
 import java.io.*;
 import java.security.SecureRandom;
-import java.util.Random;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.ThreadFactory;
@@ -13,7 +12,11 @@ import java.util.function.Consumer;
 public class Util {
 
     public static File tmpFile() throws IOException {
-        return File.createTempFile("audioscape", ".tmp");
+        return tmpFile("tmp");
+    }
+
+    public static File tmpFile(String sufix) throws IOException {
+        return File.createTempFile("audioscape", "." + sufix);
     }
 
     public static void writeToFile(String text, String path) throws IOException {
@@ -62,14 +65,42 @@ public class Util {
         return files[random.nextInt(files.length)];
     }
 
-    public static int execute(String command) throws Exception {
+    public static ExecuteResult execute(String command) throws Exception {
+        System.out.println("Executing command: " + command);
         Process process = Runtime.getRuntime().exec(command);
+        StringBuilder output = new StringBuilder();
+        StringBuilder error = new StringBuilder();
         StreamGobbler streamGobbler =
-                new StreamGobbler(process.getInputStream(), System.out::println);
-        Executors.newSingleThreadExecutor().submit(streamGobbler);
+                new StreamGobbler(process.getInputStream(), x -> {
+                    //System.out.println(x);
+                    output.append(x + '\n');
+                });
+        StreamGobbler streamGobblerError =
+                new StreamGobbler(process.getErrorStream(), x -> {
+                    //System.out.println(x);
+                    error.append(x + '\n');
+                });
+        Thread o = new Thread(streamGobbler);
+        o.setDaemon(true);
+        Thread e = new Thread(streamGobblerError);
+        e.setDaemon(true);
+        o.start();
+        e.start();
+        // Executors.newSingleThreadExecutor().submit(streamGobbler);
+        // Executors.newSingleThreadExecutor().submit(streamGobblerError);
         int exitCode = process.waitFor();
         process.destroyForcibly();
-        return exitCode;
+        ExecuteResult result = new ExecuteResult();
+        result.exitCode = exitCode;
+        result.output = output.toString();
+        result.error = error.toString();
+        return result;
+    }
+
+    public static class ExecuteResult {
+        public int exitCode;
+        public String output;
+        public String error;
     }
 
     private static class StreamGobbler implements Runnable {
@@ -100,7 +131,7 @@ public class Util {
         return pool;
     }
 
-    public static String pad(int number){
+    public static String pad(int number) {
         return String.format("%04d", number);
     }
 

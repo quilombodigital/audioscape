@@ -7,6 +7,7 @@ import org.jnativehook.NativeHookException;
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
 import org.quilombo.audioscape.audio.AudioRecorder;
+import org.quilombo.audioscape.audio.AudioTricks;
 import org.quilombo.audioscape.download.Downloader;
 import org.quilombo.audioscape.download.DownloaderConfig;
 import org.quilombo.audioscape.gui.VideoPlayer;
@@ -64,7 +65,7 @@ public class AudioScape {
             createFullscrenVideoInterface();
             setState(AudioScapeStates.CHOOSING_RANDOM_VIDEO);
         } else if (currentState == AudioScapeStates.CHOOSING_RANDOM_VIDEO) {
-            if (lastSessionId != null && lastSessionAlternateFlag && lastSessionRepeatCounter < 3) {
+            if (lastSessionId != null && lastSessionAlternateFlag && lastSessionRepeatCounter < 2) {
                 lastSessionRepeatCounter++;
                 repeatLastSession();
             } else {
@@ -174,11 +175,9 @@ public class AudioScape {
 
     private void chooseRandomVideo() throws Exception {
         File randomSession = Util.randomFileInDirectory(RESULTS_DIRECTORY);
-        if (randomSession == null) {
-            setState(AudioScapeStates.SHOWING_INSTRUCTIONS);
-            return;
+        if (randomSession != null) {
+            playSessionMix(randomSession);
         }
-        playSessionMix(randomSession);
     }
 
     private void repeatLastSession() throws Exception {
@@ -251,6 +250,17 @@ public class AudioScape {
         //videoRecorder.stop();
         audioRecorder.stop();
         recordingEndTime = System.currentTimeMillis();
+        if (config.normalizationEnabled) {
+            String userAudioNormalizedFilename = recordResultDirectory + "/record_normalized.wav";
+            AudioTricks.normalize(userAudioFilename, userAudioNormalizedFilename);
+            userAudioFilename = userAudioNormalizedFilename;
+        }
+        //NOTE: NOT SURE IF TRIM IS A GOOD IDEA... NEED TO CHANGE DURATION MEASUREMENT
+        if (config.trimEnabled) {
+            String userAudioTrimmedFilename = recordResultDirectory + "/record_trimmed.wav";
+            AudioTricks.normalize(userAudioFilename, userAudioTrimmedFilename);
+            userAudioFilename = userAudioTrimmedFilename;
+        }
     }
 
     public void startProcessing() throws Exception {
@@ -332,6 +342,8 @@ public class AudioScape {
                         down.SAVE_PATH = "data/download/";
                         down.download(new DownloaderConfig(), queries);
                         wordsToSanitize.add(word);
+                    } else {
+                        Thread.sleep(500);//give some time to show words...
                     }
                 }
 
